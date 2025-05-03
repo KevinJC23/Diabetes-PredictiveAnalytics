@@ -65,6 +65,34 @@ More detailed variables on Diabetes Dataset:
 | blood_glucose_level  | 100,000        | int64   |
 | diabetes             | 100,000        | int64   |
 
+Show the summary of descriptive statistic
+| Statistic | age       | hypertension | heart_disease | bmi       | HbA1c_level | blood_glucose_level | diabetes |
+|-----------|-----------|--------------|----------------|-----------|-------------|----------------------|----------|
+| count     | 100000.00 | 100000.00    | 100000.00      | 100000.00 | 100000.00   | 100000.00            | 100000.00|
+| mean      | 41.89     | 0.07         | 0.04           | 27.32     | 5.53        | 138.06               | 0.09     |
+| std       | 22.52     | 0.26         | 0.19           | 6.64      | 1.07        | 40.71                | 0.28     |
+| min       | 0.08      | 0.00         | 0.00           | 10.01     | 3.50        | 80.00                | 0.00     |
+| 25%       | 24.00     | 0.00         | 0.00           | 23.63     | 4.80        | 100.00               | 0.00     |
+| 50%       | 43.00     | 0.00         | 0.00           | 27.32     | 5.80        | 140.00               | 0.00     |
+| 75%       | 60.00     | 0.00         | 0.00           | 29.58     | 6.20        | 159.00               | 0.00     |
+| max       | 80.00     | 1.00         | 1.00           | 95.69     | 9.00        | 300.00               | 1.00     |
+
+Visualize Gender Distribution using bar chart
+
+![Gender Distribution](src/gender.png)
+
+Visualize Hypertension Distribution using pie chart
+
+![Hypertension Distribution](src/hypertension.png)
+
+Visualize Heart Disease Distribution using pie chart
+
+![Heart Disease Distribution](src/heart_disease.png)
+
+Visualize Smoking History Distribution using bar chart
+
+![Smoking History Distribution](src/smoking_history.png)
+
 ## Data Preparation
 
 
