@@ -94,10 +94,97 @@ Visualize Smoking History Distribution using bar chart
 ![Smoking History Distribution](src/smoking_history.png)
 
 ## Data Preparation
+To make the model perform better and produce more reliable predictions, a thorough data preparation process was conducted. This step is crucial to ensure that the dataset is clean, consistent, and suitable for machine learning algorithms. The following techniques were applied in the notebook, in the order they were executed:
+- Dropping Duplicate Records
+  - Duplicate rows in the dataset can skew the model by overrepresenting certain patterns. Therefore, we used:
+    <pre></pre>
+    Reason: Removing duplicates ensures that each instance in the training data is unique, avoiding bias in learning and helping to prevent overfitting.
+- Label Encoding
+  - Categorical features such as gender and smoking_history were encoded using label encoding to convert string labels into numeric form.
+    <pre></pre>
+    Reason: Most machine learning models only accept numerical input. Label encoding enables the use of categorical data in these models while maintaining the order of categories if needed.
+- Outliers handling
+  - Outliers were detected and treated using IQR (Interquartile Range) method on numerical features like bmi, HbA1c_level, and blood_glucose_level.
+    <pre></pre>
+    Reason: Outliers can introduce noise and distort the learning process, leading to lower model accuracy. By handling them, we improve the model's ability to generalize.
+- Normalization
+  - Numerical features such as age, bmi, HbA1c_level, and blood_glucose_level were scaled using MinMaxScaler:
+    <pre></pre>
+    Reason: Normalization ensures that features are on the same scale, preventing models from favoring features with larger magnitudes. This is especially important for distance-based models and gradient-based optimization.
+- Spliting the Dataset
+  Before training the model, we split the dataset into training and testing sets:
+  <pre></pre>
+  Reason:
+  - Data splitting is essential to evaluate how well the machine learning model generalizes to unseen data.
+  - Stratify is used to ensure the distribution of the target variable (diabetes) is preserved in both training and testing sets, which is particularly important when dealing with imbalanced datasets.
+  - A 20% test size was selected to provide enough data for a reliable evaluation while maintaining sufficient data for training.
+  - A random state was fixed to ensure the results are reproducible.
 
-
+Each of these steps plays a vital role in transforming the raw data into a structured and clean form, enabling the machine learning model to learn patterns effectively and make accurate predictions.
 ## Modeling
+To solve the classification problem of predicting diabetes, we experimented with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
+- Models Used:
+  - Linear Support Vector Classifier (LinearSVC)
+  - Linear Regression
+  - Random Forest
+  - AdaBoost Classifier (Boosting)
+- Modeling Process & Parameters
+  Each model was tuned using GridSearchCV with 5-fold cross-validation and the accuracy metric as the scoring method. The following parameter grids were used:
+  - LinearSVC
+    - C: Regularization parameter (smaller → stronger regularization)
+    - max_iter: Maximum number of iterations for convergence
+  - LogisticRegression
+    - C: Inverse of regularization strength
+    - solver: Optimization algorithm (liblinear for small datasets, lbfgs for larger datasets)
+  - RandomForestClassifier
+    - n_estimators: Number of trees
+    - max_depth: Maximum depth of the trees
+    - min_samples_split: Minimum samples required to split an internal node
+  - AdaBoostClassifier
+    - n_estimators: Number of boosting stages
+    - learning_rate: Shrinks contribution of each classifier
 
+Each model was trained on the training set, and accuracy was evaluated on both the training and test sets.
+
+- Model Performance Summary
+| Model               | Train Accuracy | Test Accuracy |
+|--------------------|----------------|----------------|
+| LinearSVC          | 0.9481         | 0.9473         |
+| LogisticRegression | 0.9476         | 0.9471         |
+| RandomForest       | 0.9638         | 0.9631         |
+| Boosting (AdaBoost)| 0.9627         | 0.9630         |
+
+- Pros & Cons of Each Algorithm
+  - LinearSVC
+    - Pros:
+      - Works well on high-dimensional data
+      - Fast training on smaller datasets
+    - Cons:
+      - Not effective on non-linearly separable data
+      - Sensitive to feature scaling
+  - Logistic Regression
+    - Pros:
+      - Simple and interpretable
+      - Good baseline model
+    - Cons:
+      - Assumes linear relationship
+      - Limited power on complex datasets
+  - Random Forest
+    - Pros:
+      - Handles non-linearity and interactions well
+      - Robust to outliers and noise
+    - Cons:
+      - Can be slow with large number of trees
+      - Less interpretable
+  - AdaBoost (Boosting)
+    - Pros:
+      - Improves accuracy by combining weak learners
+      - Works well on imbalanced datasets
+    - Cons:
+      - Sensitive to noisy data
+      - Can overfit if not properly tuned
+
+After evaluating all models based on test accuracy, the best performing model was selected as the final solution, Random Forest yielded the highest test accuracy with minimal overfitting and strong performance across both training and test data. It also handles both categorical and numerical features effectively without requiring feature scaling.
 
 ## Evaluation
 
