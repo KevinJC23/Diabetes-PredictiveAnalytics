@@ -30,6 +30,17 @@ Dataset downloaded from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/di
   
   path = kagglehub.dataset_download("iammustafatz/diabetes-prediction-dataset")
 </pre>
+
+Dataset Information
+- Consist of 100000 lines (before data cleaning)
+- Have 9 feature include 1 labels
+- Target label: Diabetes (1 = diabetes, 0 = non-diabetes)
+
+Data Condition
+- There is no missing values
+- have 3854 data duplication
+- Data imbalance
+
 The Dataset have 8 features and 1 label that consist of:
 - Age: There are three categories in it male ,female and other.
 - Gender: Ranges from 0-80
@@ -40,6 +51,19 @@ The Dataset have 8 features and 1 label that consist of:
 - HbA1c Level: Higher levels indicate a greater risk of developing diabetes.
 - Blood Glucose Level: High blood glucose levels are a key indicator of diabetes.
 - Diabetes: with values of 1 indicating the presence of diabetes and 0 indicating the absence of diabetes.
+
+More detailed variables on Diabetes Dataset:
+| Column               | Non-Null Count | Dtype   |
+|----------------------|----------------|---------|
+| gender               | 100,000        | object  |
+| age                  | 100,000        | float64 |
+| hypertension         | 100,000        | int64   |
+| heart_disease        | 100,000        | int64   |
+| smoking_history      | 100,000        | object  |
+| bmi                  | 100,000        | float64 |
+| HbA1c_level          | 100,000        | float64 |
+| blood_glucose_level  | 100,000        | int64   |
+| diabetes             | 100,000        | int64   |
 
 ## Data Preparation
 
