@@ -24,7 +24,7 @@ Advancements in technology have enabled the utilization of Artificial Intelligen
 - Doing hyperparameter tuning to find the best parameter combinatins and optimize performance for each model using Grid Search and Random Search CV   
 
 ## Data Understanding
-Dataset downloaded from kaggle using kagglehub:
+Dataset downloaded from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset) using kagglehub:
 <pre>
   import kagglehub
   
