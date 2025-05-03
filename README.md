@@ -1,9 +1,9 @@
 # Machine Learning Project Report - Kevin Juan Carlos
 
 ## Project Domain
-Diabetes is the one global chronic disease that will have an impact on life quality and premature death. Based on research conducted by Takashima et al. (2024) in Journal of Epidemiology, diabetes significantly reduces healthy life expectancy in Japan—both men and women—and is categorized as one of the risk factors for blood pressure, body mass index (BMI), and smoking habits.
+Diabetes is the one global chronic disease that will have an impact on life quality and premature death. Based on research conducted by Takashima *et al*. (2024) in Journal of Epidemiology, diabetes significantly reduces healthy life expectancy in Japan—both men and women—and is categorized as one of the risk factors for blood pressure, body mass index (BMI), and smoking habits.
 
-Furthermore, according to the American Diabetes Association by Wild et al. (2004), diabetes prevalence sharply increases when people get older, making the older generation more vulnerable to this disease. Additionally, gender also plays a crucial factor in diabetes development. According to Regitz-Zagrosek (2012), biological and hormonal differences contribute to variations in how men and women experience chronic illnesses such as diabetes. For example, men are more likely to develop diabetes at lower BMI values, while women with hormonal conditions like PCOS are at higher risk.
+Furthermore, according to the American Diabetes Association by Wild *et al*. (2004), diabetes prevalence sharply increases when people get older, making the older generation more vulnerable to this disease. Additionally, gender also plays a crucial factor in diabetes development. According to Regitz-Zagrosek (2012), biological and hormonal differences contribute to variations in how men and women experience chronic illnesses such as diabetes. For example, men are more likely to develop diabetes at lower BMI values, while women with hormonal conditions like PCOS are at higher risk.
 
 This fact shows diabetes cannot only cause physical complications but also shorten a person's disability life span. Therefore, early detection and intervention are even more essential to maintaining the quality of the community.
 
