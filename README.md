@@ -18,11 +18,28 @@ Advancements in technology have enabled the utilization of Artificial Intelligen
 - Build prediction model using medical data and risks factors to give early diagnosis that more efficient and accurate.
 - Compare each Machine Learning algorithm to knowing which one can give high accuracy to predict diabetes risk, and optimalize model to get the better result.
 
-### Solutions
-
+### Solution Statements
+- Comparing four different Machine Learning algorithms which is Linear Support Vector Classifier (LinearSVC), Linear Regression, Random Forest, and AdaBoost 
+- Doing Data Preprocessing to make sure input model quality and model can working optimally
+- Doing hyperparameter tuning to find the best parameter combinatins and optimize performance for each model using Grid Search and Random Search CV   
 
 ## Data Understanding
-
+Dataset downloaded from kaggle using kagglehub:
+<pre>
+  import kagglehub
+  
+  path = kagglehub.dataset_download("iammustafatz/diabetes-prediction-dataset")
+</pre>
+The Dataset have 8 features and 1 label that consist of:
+- Age: There are three categories in it male ,female and other.
+- Gender: Ranges from 0-80
+- Body Mass Index (BMI): The range of BMI in the dataset is from 10.16 to 71.55. BMI less than 18.5 is underweight, 18.5-24.9 is normal, 25-29.9 is overweight, and 30 or more is obese.
+- Hypertension: It has values a 0 or 1 where 0 indicates they don’t have hypertension and for 1 it means they have hypertension.
+- Heart Disease: It has values a 0 or 1 where 0 indicates they don’t have heart disease and for 1 it means they have heart disease.
+- Smoking History: have 5 categories i.e not current,former,No Info,current,never and ever.
+- HbA1c Level: Higher levels indicate a greater risk of developing diabetes.
+- Blood Glucose Level: High blood glucose levels are a key indicator of diabetes.
+- Diabetes: with values of 1 indicating the presence of diabetes and 0 indicating the absence of diabetes.
 
 ## Data Preparation
 
