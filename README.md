@@ -7,7 +7,7 @@ Furthermore, according to the American Diabetes Association by Wild *et al*. (20
 
 This fact shows diabetes cannot only cause physical complications but also shorten a person's disability life span. Therefore, early detection and intervention are even more essential to maintaining the quality of the community.
 
-Advancements in technology have enabled the utilization of Artificial Intelligence, particularly Machine Learning, which can be applied to predict the probability of people having diabetes based on medical data which is Gender, Age, Hypertension, Heart Disease, Smoking History, BMI, HbA1c Level, and Blood Glucose Level. This project focuses on predictive analytics and aims to compare Machine Learning model classification to know what models can make the diagnosis process efficient and accurate.
+Advancements in technology have enabled the utilization of Artificial Intelligence, particularly Machine Learning, which can be applied to predict the probability of people having diabetes based on their medical data. This project focuses on predictive analytics and aims to compare Machine Learning model classification to know what models can make the diagnosis process efficient and accurate.
 
 ## Business Understanding
 
