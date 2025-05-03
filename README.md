@@ -8,9 +8,17 @@ Furthermore, according to the American Diabetes Association by Wild *et al*. (20
 Advancements in technology have enabled the utilization of Artificial Intelligence, particularly Machine Learning, which can be applied to predict the probability of people having diabetes based on their medical data. This project focuses on predictive analytics and aims to compare Machine Learning model classification to know what models can make the diagnosis process efficient and accurate.
 
 ## Business Understanding
+### Problem Statements
+- How to predict diabetes risks based on the factors which is blood pressure, body mass index (BMI), smoking habits, age and gender?
+- How to use Machine Learning for increasing the accuracy to detect the diabetes risks?
+- What the most effective algorithm for analyze medical data and predict the probability of people who have diabetes and how these models can improve efficiency for diagnosis process?
 
+### Goals
+- Indentify and understand the main risk factors (blood pressure, body mass index (BMI), smoking habits, age and gender) that can influence diabetes prediction and how they can be used on Machine Learning model for accurate diagnosis.
+- Build prediction model using medical data and risks factors to give early diagnosis that more efficient and accurate.
+- Compare each Machine Learning algorithm to knowing which one can give high accuracy to predict diabetes risk, and optimalize model to get the better result.
 
-## Goals
+### Solutions
 
 
 ## Data Understanding
