@@ -276,8 +276,6 @@ The **ROC-AUC (Receiver Operating Characteristic - Area Under Curve)** is a perf
 
 ![ROC-AUC](src/ROC-AUC.png)
 
-This section summarizes the evaluation results for each model and provides a detailed explanation of the metrics used in classification tasks.
-
 ## References
 Wild, S., Roglic, G., Green, A., Sicree, R., & King, H. (2004). Global prevalence of diabetes. Diabetes Care, 27(5), 1047–1053. https://doi.org/10.2337/diacare.27.5.1047
 
