@@ -23,12 +23,7 @@ Advancements in technology have enabled the utilization of Artificial Intelligen
 
 ## Data Understanding
 ### Source
-The dataset used in this project was obtained from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset) with the name "Diabetes Prediction Dataset". It can be downloaded using kagglehub library, this following code can be used to download the dataset:
-<pre>
-  import kagglehub
-  
-  path = kagglehub.dataset_download("iammustafatz/diabetes-prediction-dataset")
-</pre>
+The dataset used in this project was obtained from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset) with the name "Diabetes Prediction Dataset". It can be downloaded using kagglehub library
 
 ### Dataset Information
 This dataset consists of 100000 entries before data cleaning and is designed to predict the likelihood of someone having diabetes based on the features and lifestyle factors. The dataset includes nine features, one of which is the target label Diabetes, with values defined as follows: 
@@ -95,69 +90,21 @@ This part presenting the visualization (like bar chart and pie chart) from distr
 ## Data Preparation
 To make the model perform better and produce more reliable predictions, a thorough data preparation process was conducted. This step is crucial to ensure that the dataset is clean, consistent, and suitable for machine learning algorithms. The following techniques were applied in the notebook, in the order they were executed:
 - Dropping Duplicate Records: Duplicate rows in the dataset can skew the model by overrepresenting certain patterns. To ensure that each instance in the training data is unique and to prevent bias and overfitting, duplicate entries were identified and removed.
-    <pre>
-       # Drop Duplicate Columns
-       diabetes = diabetes.drop_duplicates()
-    </pre>
-    
-- Removing Irrelevant Values: Some values in the dataset may be irrelevant or too rare to contribute meaningful statistical insight. These values were examined and removed to improve data quality and model learning efficiency.
-    <pre>
-       # Drop Unnecesary Value on Gender Column
-       gender_label = diabetes[diabetes['gender'] == 'Other'].index
-       diabetes.drop(gender_label, inplace=True)
   
-       # Drop Unnecesary Value on Smoking History Column
-       smoking_history_label = diabetes[diabetes['smoking_history'] == 'No Info'].index
-       diabetes.drop(smoking_history_label, inplace=True)
-    </pre>
-    
+- Removing Irrelevant Values: Some values in the dataset may be irrelevant or too rare to contribute meaningful statistical insight. These values were examined and removed to improve data quality and model learning efficiency.
+  
 - Label Encoding: Categorical features such as `gender` and `smoking_history` were encoded using **Label Encoding**, converting string labels into numeric form. This step is necessary because most machine learning algorithms require numerical input. Label encoding allows these categorical features to be used effectively in the modeling process while preserving ordinal relationships, if any.
-    <pre>
-      # Do Label Encoding for 'Gender' and 'Smoking History' Column
-      labelEncoder = LabelEncoder()
-      diabetes['gender'] = labelEncoder.fit_transform(diabetes['gender'])
-      diabetes['smoking_history'] = labelEncoder.fit_transform(diabetes['smoking_history'])
-    </pre>
-    
+
 - Outliers handling: Outliers in numerical features like `bmi`, `HbA1c_level`, and `blood_glucose_level` were detected and treated using the **Interquartile Range (IQR)** method. Outliers can introduce noise and distort the learning process, reducing model accuracy. By managing these outliers, the model’s generalization performance is improved.
-    <pre>
-      # Outliers Handling
-      def cap_outliers(diabetes, column):
-          Q1 = diabetes[column].quantile(0.25)
-          Q3 = diabetes[column].quantile(0.75)
-          IQR = Q3 - Q1
-          lower_bound = Q1 - 1.5 * IQR
-          upper_bound = Q3 + 1.5 * IQR
-          diabetes[column] = diabetes[column].clip(lower_bound, upper_bound)
-          return diabetes
-      
-      for col in ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']:
-          diabetes = cap_outliers(diabetes, col)
-    </pre>
-    
+
 - Normalization: Numerical features including `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were scaled using **MinMaxScaler**. Normalization ensures that all features lie within the same scale range (typically 0 to 1), which is especially important for:
   - Distance-based models (e.g., KNN)
   - Gradient-based optimization algorithms (e.g., SVM, Logistic Regression)
-    <pre>
-      # Numeric Feature Normalization
-      features = ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']
-      scaler = StandardScaler()
-      
-      diabetes[features] = scaler.fit_transform(diabetes[features])
-    </pre>
-  
+
 - Spliting the Dataset: Before model training, the dataset was split into training and testing sets:
   - **Test Size**: 20% of the data was allocated for testing to ensure a reliable evaluation.
   - **Stratification**: The split was stratified based on the target variable (`diabetes`) to preserve its distribution in both sets, which is crucial for imbalanced datasets.
   - **Random State**: A fixed random state was used to make the split reproducible.
-  
-  This preprocessing pipeline was essential for ensuring high data quality, improving model learning, and achieving reliable performance on unseen data.
-    <pre>
-      X = diabetes.drop('diabetes', axis=1)
-      y = diabetes['diabetes']
-      
-      X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.2, random_state=42)
-    </pre>
   
 Each of these steps plays a vital role in transforming the raw data into a structured and clean form, enabling the machine learning model to learn patterns effectively and make accurate predictions.
 
