@@ -95,9 +95,7 @@ To make the model perform better and produce more reliable predictions, a thorou
 
 - Outliers handling: Outliers in numerical features like `bmi`, `HbA1c_level`, and `blood_glucose_level` were detected and treated using the **Interquartile Range (IQR)** method. Outliers can introduce noise and distort the learning process, reducing model accuracy. By managing these outliers, the model’s generalization performance is improved.
 
-- Normalization: Numerical features including `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were scaled using **MinMaxScaler**. Normalization ensures that all features lie within the same scale range (typically 0 to 1), which is especially important for:
-  - Distance-based models (e.g., KNN)
-  - Gradient-based optimization algorithms (e.g., SVM, Logistic Regression)
+- Normalization: Numerical features including `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were scaled using **StandardScaler**. Normalization ensures that all features lie within the same scale range (typically 0 to 1), which is especially important for gradient-based optimization algorithms like Logistic Regression
 
 - Spliting the Dataset: Before model training, the dataset was split into training and testing sets:
   - **Test Size**: 20% of the data was allocated for testing to ensure a reliable evaluation.
