@@ -147,6 +147,7 @@ To solve the classification problem of predicting diabetes, we experimented with
 Each model was trained on the training set, and accuracy was evaluated on both the training and test sets.
 
 - Model Performance Summary
+  
 | Model               | Train Accuracy | Test Accuracy |
 |--------------------|----------------|----------------|
 | LinearSVC          | 0.9481         | 0.9473         |
@@ -187,6 +188,63 @@ Each model was trained on the training set, and accuracy was evaluated on both t
 After evaluating all models based on test accuracy, the best performing model was selected as the final solution, Random Forest yielded the highest test accuracy with minimal overfitting and strong performance across both training and test data. It also handles both categorical and numerical features effectively without requiring feature scaling.
 
 ## Evaluation
+### Classification Report for LinearSVC:
+
+```
+              precision    recall  f1-score   support
+
+           0       0.95      0.99      0.97     11243
+           1       0.87      0.62      0.72      1407
+
+    accuracy                           0.95     12650
+   macro avg       0.91      0.80      0.85     12650
+weighted avg       0.94      0.95      0.94     12650
+```
+
+---
+
+### Classification Report for LogisticRegression:
+
+```
+              precision    recall  f1-score   support
+
+           0       0.96      0.99      0.97     11243
+           1       0.85      0.63      0.73      1407
+
+    accuracy                           0.95     12650
+   macro avg       0.90      0.81      0.85     12650
+weighted avg       0.94      0.95      0.94     12650
+```
+
+---
+
+### Classification Report for RandomForest:
+
+```
+              precision    recall  f1-score   support
+
+           0       0.96      1.00      0.98     11243
+           1       1.00      0.67      0.80      1407
+
+    accuracy                           0.96     12650
+   macro avg       0.98      0.83      0.89     12650
+weighted avg       0.96      0.96      0.96     12650
+```
+
+---
+
+### Classification Report for Boosting:
+
+```
+              precision    recall  f1-score   support
+
+           0       0.96      1.00      0.98     11243
+           1       1.00      0.67      0.80      1407
+
+    accuracy                           0.96     12650
+   macro avg       0.98      0.83      0.89     12650
+weighted avg       0.96      0.96      0.96     12650
+```
 
 
 ## References
