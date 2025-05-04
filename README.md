@@ -17,40 +17,42 @@ Advancements in technology have enabled the utilization of Artificial Intelligen
 - Compare each Machine Learning algorithm to knowing which one can give high accuracy to predict diabetes risk, and optimalize model to get the better result.
 
 ### Solution Statements
-- Comparing four different Machine Learning algorithms which is Linear Support Vector Classifier (LinearSVC), Linear Regression, Random Forest, and AdaBoost 
-- Doing Data Preprocessing to make sure input model quality and model can working optimally
-- Doing hyperparameter tuning to find the best parameter combinatins and optimize performance for each model using Grid Search and Random Search CV   
+- Comparing four different Machine Learning algorithms which are Linear Support Vector Classifier (LinearSVC), Linear Regression, Random Forest, and AdaBoost.
+- Data preprocessing is done to make sure the input model quality and model can work optimally.
+- Doing hyperparameter tuning to find the best parameter combinations and optimize performance for each model using GridSearchCV and RandomizedSearchCV.  
 
 ## Data Understanding
-Dataset downloaded from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset) using kagglehub:
+### Source
+The dataset used in this project was obtained from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset) with the name "Diabetes Prediction Dataset". It can be downloaded using kagglehub library, this following code can be used to download the dataset:
 <pre>
   import kagglehub
   
   path = kagglehub.dataset_download("iammustafatz/diabetes-prediction-dataset")
 </pre>
 
-Dataset Information
-- Consist of 100000 lines (before data cleaning)
-- Have 9 feature include 1 labels
-- Target label: Diabetes (1 = diabetes, 0 = non-diabetes)
+### Dataset Information
+This dataset consists of 100000 entries before data cleaning and is designed to predict the likelihood of someone having diabetes based on the features and lifestyle factors. The dataset includes nine features, one of which is the target label Diabetes, with values defined as follows: 
+- 1 = diabetes
+- 0 = non-diabetes
 
-Data Condition
-- There is no missing values
-- have 3854 data duplication
+### Data Condition
+- There are no missing values
+- Have 3854 data duplication
 - Data imbalance
 
-The Dataset have 8 features and 1 label that consist of:
-- Age: There are three categories in it male ,female and other.
+The dataset consists of eight input features and one target label, which are as follows:
+- Age: There are three categories in it male, female, and other.
 - Gender: Ranges from 0-80
 - Body Mass Index (BMI): The range of BMI in the dataset is from 10.16 to 71.55. BMI less than 18.5 is underweight, 18.5-24.9 is normal, 25-29.9 is overweight, and 30 or more is obese.
-- Hypertension: It has values a 0 or 1 where 0 indicates they don’t have hypertension and for 1 it means they have hypertension.
-- Heart Disease: It has values a 0 or 1 where 0 indicates they don’t have heart disease and for 1 it means they have heart disease.
-- Smoking History: have 5 categories i.e not current,former,No Info,current,never and ever.
+- Hypertension: It has values of 0 or 1 where 0 indicates they don’t have hypertension and 1 means they have hypertension.
+- Heart Disease: It has values of 0 or 1 where 0 indicates they don’t have heart disease and 1 means they have heart disease.
+- Smoking History: consists of 5 categories which is not current, former, no info, current, never, and ever.
 - HbA1c Level: Higher levels indicate a greater risk of developing diabetes.
 - Blood Glucose Level: High blood glucose levels are a key indicator of diabetes.
-- Diabetes: with values of 1 indicating the presence of diabetes and 0 indicating the absence of diabetes.
+- Diabetes: values of 1 indicate the presence of diabetes and 0 indicates the absence of diabetes.
 
-More detailed variables on Diabetes Dataset:
+### Datatypes Overview
+This part explained datatypes from each column (features) on dataset. Datatype shows how data stored and processed, example is the data in number (integer, float), text (object), or categorical and also this is become basic foundation to create a better machine learning model. 
 | Column               | Non-Null Count | Dtype   |
 |----------------------|----------------|---------|
 | gender               | 100,000        | object  |
@@ -63,7 +65,7 @@ More detailed variables on Diabetes Dataset:
 | blood_glucose_level  | 100,000        | int64   |
 | diabetes             | 100,000        | int64   |
 
-Show the summary of descriptive statistic
+Overview of Dataset’s Descriptive Statistics:
 | Statistic | age       | hypertension | heart_disease | bmi       | HbA1c_level | blood_glucose_level | diabetes |
 |-----------|-----------|--------------|----------------|-----------|-------------|----------------------|----------|
 | count     | 100000.00 | 100000.00    | 100000.00      | 100000.00 | 100000.00   | 100000.00            | 100000.00|
@@ -75,49 +77,78 @@ Show the summary of descriptive statistic
 | 75%       | 60.00     | 0.00         | 0.00           | 29.58     | 6.20        | 159.00               | 0.00     |
 | max       | 80.00     | 1.00         | 1.00           | 95.69     | 9.00        | 300.00               | 1.00     |
 
-Visualize Gender Distribution using bar chart
-
+### Bar Graph for Gender Distribution
 ![Gender Distribution](src/gender.png)
 
-Visualize Hypertension Distribution using pie chart
+### Bar Chart for Smoking History Distribution
+![Smoking History Distribution](src/smoking_history.png)
 
+### Pie Chart for Hypertension Distribution
 ![Hypertension Distribution](src/hypertension.png)
 
-Visualize Heart Disease Distribution using pie chart
-
+### Pie Chart for Heart Disease Distribution
 ![Heart Disease Distribution](src/heart_disease.png)
-
-Visualize Smoking History Distribution using bar chart
-
-![Smoking History Distribution](src/smoking_history.png)
 
 ## Data Preparation
 To make the model perform better and produce more reliable predictions, a thorough data preparation process was conducted. This step is crucial to ensure that the dataset is clean, consistent, and suitable for machine learning algorithms. The following techniques were applied in the notebook, in the order they were executed:
-- Dropping Duplicate Records
-  - Duplicate rows in the dataset can skew the model by overrepresenting certain patterns. Therefore, we used:
-    <pre></pre>
-    Reason: Removing duplicates ensures that each instance in the training data is unique, avoiding bias in learning and helping to prevent overfitting.
-- Label Encoding
-  - Categorical features such as gender and smoking_history were encoded using label encoding to convert string labels into numeric form.
-    <pre></pre>
-    Reason: Most machine learning models only accept numerical input. Label encoding enables the use of categorical data in these models while maintaining the order of categories if needed.
-- Outliers handling
-  - Outliers were detected and treated using IQR (Interquartile Range) method on numerical features like bmi, HbA1c_level, and blood_glucose_level.
-    <pre></pre>
-    Reason: Outliers can introduce noise and distort the learning process, leading to lower model accuracy. By handling them, we improve the model's ability to generalize.
-- Normalization
-  - Numerical features such as age, bmi, HbA1c_level, and blood_glucose_level were scaled using MinMaxScaler:
-    <pre></pre>
-    Reason: Normalization ensures that features are on the same scale, preventing models from favoring features with larger magnitudes. This is especially important for distance-based models and gradient-based optimization.
-- Spliting the Dataset
-  Before training the model, we split the dataset into training and testing sets:
-  <pre></pre>
-  Reason:
-  - Data splitting is essential to evaluate how well the machine learning model generalizes to unseen data.
-  - Stratify is used to ensure the distribution of the target variable (diabetes) is preserved in both training and testing sets, which is particularly important when dealing with imbalanced datasets.
-  - A 20% test size was selected to provide enough data for a reliable evaluation while maintaining sufficient data for training.
-  - A random state was fixed to ensure the results are reproducible.
-
+- Dropping Duplicate Records: duplicate rows in the dataset can skew the model by overrepresenting certain patterns. This process ensures that each instance in the training data is unique, avoiding bias in learning and helping to prevent overfitting. Therefore, we used:
+    <pre>
+     # Drop Duplicate Columns
+     diabetes = diabetes.drop_duplicates()
+    </pre>
+    
+- Removing Irrelevant Values: some values in the dataset may not contribute meaningful information or are too rare to be statistically significant. In this case:
+    <pre>
+       # Drop Unnecesary Value on Gender Column
+       gender_label = diabetes[diabetes['gender'] == 'Other'].index
+       diabetes.drop(gender_label, inplace=True)
+  
+       # Drop Unnecesary Value on Smoking History Column
+       smoking_history_label = diabetes[diabetes['smoking_history'] == 'No Info'].index
+       diabetes.drop(smoking_history_label, inplace=True)
+    </pre>
+    
+- Label Encoding: categorical features such as gender and smoking_history were encoded using label encoding to convert string labels into numeric form. Most machine learning models only accept numerical input. Label encoding enables the use of categorical data in these models while maintaining the order of categories if needed.
+    <pre>
+      # Do Label Encoding for 'Gender' and 'Smoking History' Column
+      labelEncoder = LabelEncoder()
+      diabetes['gender'] = labelEncoder.fit_transform(diabetes['gender'])
+      diabetes['smoking_history'] = labelEncoder.fit_transform(diabetes['smoking_history'])
+    </pre>
+    
+- Outliers handling: outliers were detected and treated using IQR (Interquartile Range) method on numerical features like bmi, HbA1c_level, and blood_glucose_level. Outliers can introduce noise and distort the learning process, leading to lower model accuracy. By handling them, we improve the model's ability to generalize.
+    <pre>
+      # Outliers Handling
+      def cap_outliers(diabetes, column):
+          Q1 = diabetes[column].quantile(0.25)
+          Q3 = diabetes[column].quantile(0.75)
+          IQR = Q3 - Q1
+          lower_bound = Q1 - 1.5 * IQR
+          upper_bound = Q3 + 1.5 * IQR
+          diabetes[column] = diabetes[column].clip(lower_bound, upper_bound)
+          return diabetes
+      
+      for col in ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']:
+          diabetes = cap_outliers(diabetes, col)
+    </pre>
+    
+- Normalization: Numerical features such as age, bmi, HbA1c_level, and blood_glucose_level were scaled using MinMaxScaler. Normalization ensures that features are on the same scale, preventing models from favoring features with larger magnitudes. This is especially important for distance-based models and gradient-based optimization:
+    <pre>
+      # Numeric Feature Normalization
+      features = ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']
+      scaler = StandardScaler()
+      
+      diabetes[features] = scaler.fit_transform(diabetes[features])
+    </pre>
+  
+- Spliting the Dataset: Before training the model, we split the dataset into training and testing sets. Data splitting is essential to evaluate how well the machine learning model generalizes to unseen data, Stratify is used to ensure the distribution of the target variable (diabetes) is preserved in both training and testing sets, which is particularly important when dealing with imbalanced datasets, A 20% test size was selected to provide enough data for a reliable evaluation while maintaining sufficient data for training, A random state was fixed to ensure the results are reproducible.:
+    <pre>
+      X = diabetes.drop('diabetes', axis=1)
+      y = diabetes['diabetes']
+      
+      X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.2, random_state=42)
+    </pre>
+  
 Each of these steps plays a vital role in transforming the raw data into a structured and clean form, enabling the machine learning model to learn patterns effectively and make accurate predictions.
 ## Modeling
 To solve the classification problem of predicting diabetes, we experimented with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
