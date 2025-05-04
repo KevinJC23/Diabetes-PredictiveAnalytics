@@ -246,6 +246,12 @@ weighted avg       0.96      0.96      0.96     12650
 weighted avg       0.96      0.96      0.96     12650
 ```
 
+![LinearSVC Confusion Matrix](src/LinearSVC.png)
+![Logistic Regression Confusion Matrix](src/LogisticRegression.png)
+![Random Forest Confusion Matrix](src/RandomForest.png)
+![AdaBoosting Confusion Matrix](src/Boosting.png)
+
+![ROC-AUC](src/ROC-AUC.png)
 
 ## References
 Wild, S., Roglic, G., Green, A., Sicree, R., & King, H. (2004). Global prevalence of diabetes. Diabetes Care, 27(5), 1047–1053. https://doi.org/10.2337/diacare.27.5.1047
