@@ -213,7 +213,16 @@ To solve the classification problem of predicting diabetes, we experimented with
 After evaluating all models based on test accuracy, the best performing model was selected as the final solution, Random Forest yielded the highest test accuracy with minimal overfitting and strong performance across both training and test data. It also handles both categorical and numerical features effectively without requiring feature scaling.
 
 ## Evaluation
-### Classification Report for LinearSVC:
+### Classification Report
+
+The classification report summarizes the precision, recall, f1-score, and accuracy of the models for each class. Here’s how we interpret these metrics:
+
+- **Precision**: Measures the accuracy of positive predictions. It tells us what proportion of predicted positives are actually correct.
+- **Recall**: Measures the ability of the model to identify positive instances. It tells us what proportion of actual positives were correctly predicted.
+- **F1-score**: The harmonic mean of precision and recall. It balances both precision and recall into a single metric.
+- **Support**: The number of actual occurrences of the class in the dataset.
+
+#### LinearSVC
 
 ```
               precision    recall  f1-score   support
@@ -228,7 +237,16 @@ weighted avg       0.94      0.95      0.94     12650
 
 ---
 
-### Classification Report for LogisticRegression:
+### Classification Report
+
+The classification report summarizes the precision, recall, f1-score, and accuracy of the models for each class. Here’s how we interpret these metrics:
+
+- **Precision**: Measures the accuracy of positive predictions. It tells us what proportion of predicted positives are actually correct.
+- **Recall**: Measures the ability of the model to identify positive instances. It tells us what proportion of actual positives were correctly predicted.
+- **F1-score**: The harmonic mean of precision and recall. It balances both precision and recall into a single metric.
+- **Support**: The number of actual occurrences of the class in the dataset.
+
+#### LinearSVC
 
 ```
               precision    recall  f1-score   support
@@ -242,8 +260,10 @@ weighted avg       0.94      0.95      0.94     12650
 ```
 
 ---
+- Similar to LinearSVC, Logistic Regression also performs well on classifying non-diabetes, with high precision and recall.
+- However, its recall for diabetes cases (63%) is slightly better than LinearSVC’s recall (62%).
 
-### Classification Report for RandomForest:
+#### Random Forest
 
 ```
               precision    recall  f1-score   support
@@ -258,7 +278,12 @@ weighted avg       0.96      0.96      0.96     12650
 
 ---
 
-### Classification Report for Boosting:
+- **Precision for Class 0**: 96%, showing it makes accurate predictions for non-diabetes.
+- **Recall for Class 0**: 100%, demonstrating that Random Forest correctly identifies all non-diabetes cases.
+- **Precision for Class 1**: 100%, which is excellent, but this comes at the cost of lower recall (67%) for diabetes. This means Random Forest is more confident when predicting diabetes, but it may miss some cases.
+
+#### AdaBoost (Boosting)
+
 
 ```
               precision    recall  f1-score   support
@@ -271,12 +296,46 @@ weighted avg       0.96      0.96      0.96     12650
 weighted avg       0.96      0.96      0.96     12650
 ```
 
-![LinearSVC Confusion Matrix](src/LinearSVC.png)
-![Logistic Regression Confusion Matrix](src/LogisticRegression.png)
-![Random Forest Confusion Matrix](src/RandomForest.png)
-![AdaBoosting Confusion Matrix](src/Boosting.png)
+- AdaBoost also shows very high precision for non-diabetes (96%) and perfect recall for non-diabetes (100%).
+- Similar to Random Forest, it shows a high precision (100%) for diabetes, but lower recall (67%).
+
+### Confusion Matrix
+
+The **confusion matrix** helps visualize the performance of a classification model by displaying the true positives (TP), false positives (FP), true negatives (TN), and false negatives (FN).
+
+- **True Positive (TP)**: Correctly predicted positive outcomes (diabetes).
+- **False Positive (FP)**: Incorrectly predicted positive outcomes (non-diabetes predicted as diabetes).
+- **True Negative (TN)**: Correctly predicted negative outcomes (non-diabetes).
+- **False Negative (FN)**: Incorrectly predicted negative outcomes (diabetes predicted as non-diabetes).
+
+**Confusion matrices** provide insights into the type of errors each model makes and are crucial for understanding trade-offs between precision and recall.
+
+- **LinearSVC Confusion Matrix**
+  
+  ![LinearSVC Confusion Matrix](src/LinearSVC.png)
+  
+- **Logistic Regression Confusion Matrix**
+  
+  ![Logistic Regression Confusion Matrix](src/LogisticRegression.png)
+  
+- **Random Forest Confusion Matrix**
+  
+  ![Random Forest Confusion Matrix](src/RandomForest.png)
+  
+- **AdaBoost Confusion Matrix**
+  
+  ![AdaBoosting Confusion Matrix](src/Boosting.png)
+
+### ROC-AUC
+
+The **ROC-AUC (Receiver Operating Characteristic - Area Under Curve)** is a performance measurement for classification problems. It shows the trade-off between **True Positive Rate (Recall)** and **False Positive Rate** across different thresholds.
+
+- **ROC Curve**: A plot of the true positive rate (recall) against the false positive rate.
+- **AUC (Area Under Curve)**: A measure of how well the model distinguishes between classes. The higher the AUC, the better the model’s ability to differentiate between the positive and negative classes.
 
 ![ROC-AUC](src/ROC-AUC.png)
+
+This section summarizes the evaluation results for each model and provides a detailed explanation of the metrics used in classification tasks.
 
 ## References
 Wild, S., Roglic, G., Green, A., Sicree, R., & King, H. (2004). Global prevalence of diabetes. Diabetes Care, 27(5), 1047–1053. https://doi.org/10.2337/diacare.27.5.1047
