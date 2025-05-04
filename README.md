@@ -65,7 +65,8 @@ This part explained datatypes from each column (features) on dataset. Datatype s
 | blood_glucose_level  | 100,000        | int64   |
 | diabetes             | 100,000        | int64   |
 
-Overview of Dataset’s Descriptive Statistics:
+### Datasets Statistic Descriptive
+This part presenting the statistic summary from numeric feature on dataset.
 | Statistic | age       | hypertension | heart_disease | bmi       | HbA1c_level | blood_glucose_level | diabetes |
 |-----------|-----------|--------------|----------------|-----------|-------------|----------------------|----------|
 | count     | 100000.00 | 100000.00    | 100000.00      | 100000.00 | 100000.00   | 100000.00            | 100000.00|
@@ -77,16 +78,18 @@ Overview of Dataset’s Descriptive Statistics:
 | 75%       | 60.00     | 0.00         | 0.00           | 29.58     | 6.20        | 159.00               | 0.00     |
 | max       | 80.00     | 1.00         | 1.00           | 95.69     | 9.00        | 300.00               | 1.00     |
 
-### Bar Graph for Gender Distribution
+### Data Ditribution Visualization
+This part presenting the visualization (like bar chart and pie chart) from distribution in each categorical feature.
+#### Bar Chart for Gender Distribution
 ![Gender Distribution](src/gender.png)
 
-### Bar Chart for Smoking History Distribution
+#### Bar Chart for Smoking History Distribution
 ![Smoking History Distribution](src/smoking_history.png)
 
-### Pie Chart for Hypertension Distribution
+#### Pie Chart for Hypertension Distribution
 ![Hypertension Distribution](src/hypertension.png)
 
-### Pie Chart for Heart Disease Distribution
+#### Pie Chart for Heart Disease Distribution
 ![Heart Disease Distribution](src/heart_disease.png)
 
 ## Data Preparation
@@ -153,29 +156,52 @@ Each of these steps plays a vital role in transforming the raw data into a struc
 ## Modeling
 To solve the classification problem of predicting diabetes, we experimented with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
 - Models Used:
-  - Linear Support Vector Classifier (LinearSVC)
-  - Linear Regression
-  - Random Forest
-  - AdaBoost Classifier (Boosting)
-- Modeling Process & Parameters
-  Each model was tuned using GridSearchCV with 5-fold cross-validation and the accuracy metric as the scoring method. The following parameter grids were used:
-  - LinearSVC
-    - C: Regularization parameter (smaller → stronger regularization)
-    - max_iter: Maximum number of iterations for convergence
-  - LogisticRegression
-    - C: Inverse of regularization strength
-    - solver: Optimization algorithm (liblinear for small datasets, lbfgs for larger datasets)
-  - RandomForestClassifier
-    - n_estimators: Number of trees
-    - max_depth: Maximum depth of the trees
-    - min_samples_split: Minimum samples required to split an internal node
-  - AdaBoostClassifier
-    - n_estimators: Number of boosting stages
-    - learning_rate: Shrinks contribution of each classifier
+  ### Linear Support Vector Classifier (LinearSVC)
+  - Hyperparameters Tuned:
+    - C: Controls the regularization strength (smaller values → stronger regularization)
+    - max_iter: Sets the maximum number of iterations before the algorithm stops
+  - Pros:
+    - Efficient for high-dimensional datasets
+    - Fast training time on smaller datasets
+  - Cons:
+    - Assumes data is linearly separable
+    - Sensitive to feature scaling and may not perform well with unscaled or noisy data
+  ### Linear Regression
+  - Hyperparameters Tuned:
+    - C: Inverse of regularization strength (higher value = less regularization)
+    - solver: Optimization algorithm used (liblinear for small datasets, lbfgs for larger ones)
+  - Pros:
+    - Simple and easy to interpret
+    - Performs well as a baseline model
+    - Less prone to overfitting with proper regularization
+  - Cons:
+    - Assumes a linear relationship between features and the target
+    - May struggle with complex or non-linear data distributions
+  ### Random Forest
+  - Hyperparameters Tuned:
+    - n_estimators: Number of trees in the forest
+    - max_depth: Maximum depth each tree can grow
+    - min_samples_split: Minimum number of samples required to split a node
+  - Pros:
+    - Captures non-linear relationships and feature interactions effectively
+    - Robust to outliers, noise, and missing values
+    - Works with both categorical and numerical features without scaling
+  - Cons:
+    - Training can be slower with a large number of trees
+    - Harder to interpret compared to linear models
+   ### AdaBoost Classifier (Boosting)
+   - Hyperparameters Tuned:
+     - n_estimators: Number of boosting stages
+     - learning_rate: Weight reduction for each weak learner's contribution
+   - Pros:
+     - Increases accuracy by combining weak learners
+     - Works well on imbalanced datasets
+     - Often improves over simple models with minimal tuning
+   - Cons:
+     - Sensitive to outliers and noisy data
+     - Can overfit if the number of estimators is too high or learning rate too low
 
-Each model was trained on the training set, and accuracy was evaluated on both the training and test sets.
-
-- Model Performance Summary
+- Model Performance Summary:
   
 | Model               | Train Accuracy | Test Accuracy |
 |--------------------|----------------|----------------|
@@ -183,36 +209,6 @@ Each model was trained on the training set, and accuracy was evaluated on both t
 | LogisticRegression | 0.9476         | 0.9471         |
 | RandomForest       | 0.9638         | 0.9631         |
 | Boosting (AdaBoost)| 0.9627         | 0.9630         |
-
-- Pros & Cons of Each Algorithm
-  - LinearSVC
-    - Pros:
-      - Works well on high-dimensional data
-      - Fast training on smaller datasets
-    - Cons:
-      - Not effective on non-linearly separable data
-      - Sensitive to feature scaling
-  - Logistic Regression
-    - Pros:
-      - Simple and interpretable
-      - Good baseline model
-    - Cons:
-      - Assumes linear relationship
-      - Limited power on complex datasets
-  - Random Forest
-    - Pros:
-      - Handles non-linearity and interactions well
-      - Robust to outliers and noise
-    - Cons:
-      - Can be slow with large number of trees
-      - Less interpretable
-  - AdaBoost (Boosting)
-    - Pros:
-      - Improves accuracy by combining weak learners
-      - Works well on imbalanced datasets
-    - Cons:
-      - Sensitive to noisy data
-      - Can overfit if not properly tuned
 
 After evaluating all models based on test accuracy, the best performing model was selected as the final solution, Random Forest yielded the highest test accuracy with minimal overfitting and strong performance across both training and test data. It also handles both categorical and numerical features effectively without requiring feature scaling.
 
