@@ -94,13 +94,13 @@ This part presenting the visualization (like bar chart and pie chart) from distr
 
 ## Data Preparation
 To make the model perform better and produce more reliable predictions, a thorough data preparation process was conducted. This step is crucial to ensure that the dataset is clean, consistent, and suitable for machine learning algorithms. The following techniques were applied in the notebook, in the order they were executed:
-- Dropping Duplicate Records: duplicate rows in the dataset can skew the model by overrepresenting certain patterns. This process ensures that each instance in the training data is unique, avoiding bias in learning and helping to prevent overfitting. Therefore, we used:
+- Dropping Duplicate Records: Duplicate rows in the dataset can skew the model by overrepresenting certain patterns. To ensure that each instance in the training data is unique and to prevent bias and overfitting, duplicate entries were identified and removed.
     <pre>
-     # Drop Duplicate Columns
-     diabetes = diabetes.drop_duplicates()
+       # Drop Duplicate Columns
+       diabetes = diabetes.drop_duplicates()
     </pre>
     
-- Removing Irrelevant Values: some values in the dataset may not contribute meaningful information or are too rare to be statistically significant. In this case:
+- Removing Irrelevant Values: Some values in the dataset may be irrelevant or too rare to contribute meaningful statistical insight. These values were examined and removed to improve data quality and model learning efficiency.
     <pre>
        # Drop Unnecesary Value on Gender Column
        gender_label = diabetes[diabetes['gender'] == 'Other'].index
@@ -111,7 +111,7 @@ To make the model perform better and produce more reliable predictions, a thorou
        diabetes.drop(smoking_history_label, inplace=True)
     </pre>
     
-- Label Encoding: categorical features such as gender and smoking_history were encoded using label encoding to convert string labels into numeric form. Most machine learning models only accept numerical input. Label encoding enables the use of categorical data in these models while maintaining the order of categories if needed.
+- Label Encoding: Categorical features such as `gender` and `smoking_history` were encoded using **Label Encoding**, converting string labels into numeric form. This step is necessary because most machine learning algorithms require numerical input. Label encoding allows these categorical features to be used effectively in the modeling process while preserving ordinal relationships, if any.
     <pre>
       # Do Label Encoding for 'Gender' and 'Smoking History' Column
       labelEncoder = LabelEncoder()
@@ -119,7 +119,7 @@ To make the model perform better and produce more reliable predictions, a thorou
       diabetes['smoking_history'] = labelEncoder.fit_transform(diabetes['smoking_history'])
     </pre>
     
-- Outliers handling: outliers were detected and treated using IQR (Interquartile Range) method on numerical features like bmi, HbA1c_level, and blood_glucose_level. Outliers can introduce noise and distort the learning process, leading to lower model accuracy. By handling them, we improve the model's ability to generalize.
+- Outliers handling: Outliers in numerical features like `bmi`, `HbA1c_level`, and `blood_glucose_level` were detected and treated using the **Interquartile Range (IQR)** method. Outliers can introduce noise and distort the learning process, reducing model accuracy. By managing these outliers, the model’s generalization performance is improved.
     <pre>
       # Outliers Handling
       def cap_outliers(diabetes, column):
@@ -135,7 +135,9 @@ To make the model perform better and produce more reliable predictions, a thorou
           diabetes = cap_outliers(diabetes, col)
     </pre>
     
-- Normalization: Numerical features such as age, bmi, HbA1c_level, and blood_glucose_level were scaled using MinMaxScaler. Normalization ensures that features are on the same scale, preventing models from favoring features with larger magnitudes. This is especially important for distance-based models and gradient-based optimization:
+- Normalization: Numerical features including `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were scaled using **MinMaxScaler**. Normalization ensures that all features lie within the same scale range (typically 0 to 1), which is especially important for:
+  - Distance-based models (e.g., KNN)
+  - Gradient-based optimization algorithms (e.g., SVM, Logistic Regression)
     <pre>
       # Numeric Feature Normalization
       features = ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']
@@ -144,7 +146,12 @@ To make the model perform better and produce more reliable predictions, a thorou
       diabetes[features] = scaler.fit_transform(diabetes[features])
     </pre>
   
-- Spliting the Dataset: Before training the model, we split the dataset into training and testing sets. Data splitting is essential to evaluate how well the machine learning model generalizes to unseen data, Stratify is used to ensure the distribution of the target variable (diabetes) is preserved in both training and testing sets, which is particularly important when dealing with imbalanced datasets, A 20% test size was selected to provide enough data for a reliable evaluation while maintaining sufficient data for training, A random state was fixed to ensure the results are reproducible.:
+- Spliting the Dataset: Before model training, the dataset was split into training and testing sets:
+  - **Test Size**: 20% of the data was allocated for testing to ensure a reliable evaluation.
+  - **Stratification**: The split was stratified based on the target variable (`diabetes`) to preserve its distribution in both sets, which is crucial for imbalanced datasets.
+  - **Random State**: A fixed random state was used to make the split reproducible.
+  
+  This preprocessing pipeline was essential for ensuring high data quality, improving model learning, and achieving reliable performance on unseen data.
     <pre>
       X = diabetes.drop('diabetes', axis=1)
       y = diabetes['diabetes']
@@ -153,6 +160,7 @@ To make the model perform better and produce more reliable predictions, a thorou
     </pre>
   
 Each of these steps plays a vital role in transforming the raw data into a structured and clean form, enabling the machine learning model to learn patterns effectively and make accurate predictions.
+
 ## Modeling
 To solve the classification problem of predicting diabetes, we experimented with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
 - Models Used:
@@ -202,7 +210,7 @@ To solve the classification problem of predicting diabetes, we experimented with
      - Can overfit if the number of estimators is too high or learning rate too low
 
 - Model Performance Summary:
-  
+
 | Model               | Train Accuracy | Test Accuracy |
 |--------------------|----------------|----------------|
 | LinearSVC          | 0.9481         | 0.9473         |
@@ -214,7 +222,6 @@ After evaluating all models based on test accuracy, the best performing model wa
 
 ## Evaluation
 ### Classification Report
-
 The classification report summarizes the precision, recall, f1-score, and accuracy of the models for each class. Here’s how we interpret these metrics:
 
 - **Precision**: Measures the accuracy of positive predictions. It tells us what proportion of predicted positives are actually correct.
@@ -234,19 +241,12 @@ The classification report summarizes the precision, recall, f1-score, and accura
    macro avg       0.91      0.80      0.85     12650
 weighted avg       0.94      0.95      0.94     12650
 ```
+- **Precision for Class 0 (Non-Diabetes)**: 95%, meaning 95% of the time, the model correctly predicted non-diabetes cases.
+- **Recall for Class 0**: 99%, meaning the model correctly identified 99% of all non-diabetes cases.
+- **Precision for Class 1 (Diabetes)**: 87%, showing that 87% of diabetes predictions were correct.
+- **Recall for Class 1**: 62%, meaning the model only identified 62% of actual diabetes cases.
 
----
-
-### Classification Report
-
-The classification report summarizes the precision, recall, f1-score, and accuracy of the models for each class. Here’s how we interpret these metrics:
-
-- **Precision**: Measures the accuracy of positive predictions. It tells us what proportion of predicted positives are actually correct.
-- **Recall**: Measures the ability of the model to identify positive instances. It tells us what proportion of actual positives were correctly predicted.
-- **F1-score**: The harmonic mean of precision and recall. It balances both precision and recall into a single metric.
-- **Support**: The number of actual occurrences of the class in the dataset.
-
-#### LinearSVC
+#### Logistic Regression
 
 ```
               precision    recall  f1-score   support
@@ -258,8 +258,6 @@ The classification report summarizes the precision, recall, f1-score, and accura
    macro avg       0.90      0.81      0.85     12650
 weighted avg       0.94      0.95      0.94     12650
 ```
-
----
 - Similar to LinearSVC, Logistic Regression also performs well on classifying non-diabetes, with high precision and recall.
 - However, its recall for diabetes cases (63%) is slightly better than LinearSVC’s recall (62%).
 
@@ -275,8 +273,6 @@ weighted avg       0.94      0.95      0.94     12650
    macro avg       0.98      0.83      0.89     12650
 weighted avg       0.96      0.96      0.96     12650
 ```
-
----
 
 - **Precision for Class 0**: 96%, showing it makes accurate predictions for non-diabetes.
 - **Recall for Class 0**: 100%, demonstrating that Random Forest correctly identifies all non-diabetes cases.
