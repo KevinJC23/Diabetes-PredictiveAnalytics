@@ -5,7 +5,7 @@ Diabetes is the one global chronic disease that will have an impact on life qual
 
 ## Business Understanding
 ### Problem Statements
-- How to predict diabetes risks based on the factors which is blood pressure, body mass index (BMI), smoking habits, age and gender?
+- How to predict diabetes risks based on the factors which are blood pressure, body mass index (BMI), smoking habits, age and gender?
 - How to use Machine Learning for increasing the accuracy to detect the diabetes risks?
 - What the most effective algorithm for analyze medical data and predict the probability of people who have diabetes and how these models can improve efficiency for diagnosis process?
 
@@ -21,7 +21,7 @@ Diabetes is the one global chronic disease that will have an impact on life qual
 
 ## Data Understanding
 ### Source
-The dataset used in this project was obtained from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset) with the name "Diabetes Prediction Dataset". It can be downloaded using kagglehub library
+The dataset used in this project was obtained from [Kaggle](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset) with the name "Diabetes Prediction Dataset". It can be downloaded using kagglehub library.
 
 ### Dataset Information
 This dataset consists of 100000 entries before data cleaning and is designed to predict the likelihood of someone having diabetes based on the features and lifestyle factors. The dataset includes nine features, one of which is the target label Diabetes, with values defined as follows: 
@@ -34,15 +34,15 @@ This dataset consists of 100000 entries before data cleaning and is designed to 
 - Data imbalance
 
 The dataset consists of eight input features and one target label, which are as follows:
-- Age: There are three categories in it male, female, and other.
-- Gender: Ranges from 0-80
-- Body Mass Index (BMI): The range of BMI in the dataset is from 10.16 to 71.55. BMI less than 18.5 is underweight, 18.5-24.9 is normal, 25-29.9 is overweight, and 30 or more is obese.
-- Hypertension: It has values of 0 or 1 where 0 indicates they don’t have hypertension and 1 means they have hypertension.
+- Age: The range starts from 0 and goes up to 80.
+- Gender: Consist of three categories which are male, female, and other.
+- Body Mass Index (BMI): The range of BMI in the dataset is from 10.16 to 71.55. (Underweight (BMI < 18.5),  Normal (18.5 ≤ BMI < 24.9), Overweight (25 ≤ BMI < 29.9), and Obese (BMI ≥ 30)).
+- Hypertension: It has values of 0 or 1 where 0 indicates indicates they don’t have hypertension and 1 means they have hypertension.
 - Heart Disease: It has values of 0 or 1 where 0 indicates they don’t have heart disease and 1 means they have heart disease.
-- Smoking History: consists of 5 categories which is not current, former, no info, current, never, and ever.
-- HbA1c Level: Higher levels indicate a greater risk of developing diabetes.
-- Blood Glucose Level: High blood glucose levels are a key indicator of diabetes.
-- Diabetes: values of 1 indicate the presence of diabetes and 0 indicates the absence of diabetes.
+- Smoking History: Consists of five categories which are not current, former, no info, current, never, and ever.
+- HbA1c Level: Higher levels indicate a greater risk of acquiring diabetes.
+- Blood Glucose Level: High levels are a key indicator of diabetes.
+- Diabetes: values of 1 indicates the presence of diabetes and 0 indicates the absence of diabetes.
 
 ### Datatypes Overview
 This part explained datatypes from each column (features) on dataset. Datatype shows how data stored and processed, example is the data in number (integer, float), text (object), or categorical and also this is become basic foundation to create a better machine learning model. 
@@ -59,8 +59,8 @@ This part explained datatypes from each column (features) on dataset. Datatype s
 | diabetes             | 100,000        | int64   |
 
 ### Datasets Statistic Descriptive
-This part presenting the statistic summary from numeric feature on dataset.
-| Statistic | age       | hypertension | heart_disease | bmi       | HbA1c_level | blood_glucose_level | diabetes |
+This part displays the statistical summary of each column on the dataset's numeric features.
+| Statistic | age       | hypertension | heart_disease  | bmi       | HbA1c_level | blood_glucose_level  | diabetes |
 |-----------|-----------|--------------|----------------|-----------|-------------|----------------------|----------|
 | count     | 100000.00 | 100000.00    | 100000.00      | 100000.00 | 100000.00   | 100000.00            | 100000.00|
 | mean      | 41.89     | 0.07         | 0.04           | 27.32     | 5.53        | 138.06               | 0.09     |
