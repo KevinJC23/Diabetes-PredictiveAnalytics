@@ -40,9 +40,9 @@ The dataset consists of eight input features and one target label, which are as 
 - Hypertension: It has values of 0 or 1 where 0 indicates indicates they don’t have hypertension and 1 means they have hypertension.
 - Heart Disease: It has values of 0 or 1 where 0 indicates they don’t have heart disease and 1 means they have heart disease.
 - Smoking History: Consists of five categories which are not current, former, no info, current, never, and ever.
-- HbA1c Level: Higher levels indicate a greater risk of acquiring diabetes.
-- Blood Glucose Level: High levels are a key indicator of diabetes.
-- Diabetes: values of 1 indicates the presence of diabetes and 0 indicates the absence of diabetes.
+- HbA1c Level: A measure of a person's average blood sugar level over the past 2-3 months, higher levels indicate a greater risk of developing diabetes.
+- Blood Glucose Level: Refers to the amount of glucose in the bloodstream at a given time, high levels are a key indicator of diabetes.
+- Diabetes: The target variable being predicted, 1 indicates the presence of diabetes and 0 indicates the absence of diabetes.
 
 ### Datatypes Overview
 This part explained datatypes from each column (features) on dataset. Datatype shows how data stored and processed, example is the data in number (integer, float), text (object), or categorical and also this is become basic foundation to create a better machine learning model. 
