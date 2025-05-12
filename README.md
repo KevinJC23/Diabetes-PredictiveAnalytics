@@ -77,9 +77,11 @@ This part displays the statistical summary of each column on the dataset's numer
 | max       | 80.00     | 1.00         | 1.00           | 95.69     | 9.00        | 300.00               | 1.00     |
 
 ### Data Distribution Visualization
-This part presenting the visualization (like bar chart and pie chart) from distribution in each categorical feature.
+This part presenting the visualization using bar chart or pie chart from distribution in each categorical feature.
+
 #### Bar Chart for Gender Distribution
 ![Gender Distribution](src/gender.png)
+- This histogram shows that the number of females (approximately 60%) significantly exceeds the number of males (approximately 40%). Additionally, there is a small number of 'Other' labels, and it doesn't provide significant insight for modelling. For this reason, it might be removed from the dataset to simplify the analysis and help reduce noise and increase model interpretability. After removal, the data remains well-distributed between males and females, eliminating the need for additional balancing.
 
 #### Bar Chart for Smoking History Distribution
 ![Smoking History Distribution](src/smoking_history.png)
