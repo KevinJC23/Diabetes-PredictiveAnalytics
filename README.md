@@ -87,7 +87,7 @@ This histogram shows that the number of females (approximately 60%) significantl
 - #### Bar Chart for Smoking History Distribution
 ![Smoking History Distribution](src/smoking_history.png)
 
-This histogram shows that the majority of data for 'No Info' labels (approximately 70%) and the other label that represents a relatively small portion of data is distributed among the categories 'former', 'current', 'not current', and 'ever' (approximately 30%). Because the data is imbalanced between 'No Info' and the other labels, it has been removed to eliminate noise and enhance data quality. After doing this preprocessing, it could help to achieve a more balanced distribution, improved model performance, and interpretability.
+This histogram shows that the majority of data for 'No Info' labels (approximately 70%), 'Never' labels (approximately 70%), and the other label that represents a relatively small portion of data is distributed among the categories 'former', 'current', 'not current', and 'ever' (approximately 30%). Because the data is imbalanced between 'No Info' and the other labels, it can be removed to eliminate noise and enhance data quality. After doing this preprocessing, it could help to achieve a more balanced distribution, improved model performance, and interpretability.
 
 #### Pie Chart for Hypertension Distribution
 ![Hypertension Distribution](src/hypertension.png)
