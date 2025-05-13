@@ -96,21 +96,24 @@ This histogram shows that the majority of data for 'No Info' labels (approximate
 ![Heart Disease Distribution](src/heart_disease.png)
 
 ## Data Preparation
-To make the model perform better and produce more reliable predictions, a thorough data preparation process was conducted. This step is crucial to ensure that the dataset is clean, consistent, and suitable for machine learning algorithms. The following techniques were applied in the notebook, in the order they were executed:
-- Dropping Duplicate Records: Duplicate rows in the dataset can skew the model by overrepresenting certain patterns. To ensure that each instance in the training data is unique and to prevent bias and overfitting, duplicate entries were identified and removed.
+This step is crucial to ensure that the dataset is clean, consistent, and suitable for machine learning algorithms. The following techniques were applied in the notebook, in the order they were executed:
+- ### Dropping Duplicate Records
+Duplicate rows in the dataset can skew the model by overrepresenting certain patterns. To ensure that each instance in the training data is unique and to prevent bias and overfitting, duplicate entries were identified and removed.
   
-- Removing Irrelevant Values: Some values in the dataset may be irrelevant or too rare to contribute meaningful statistical insight. These values were examined and removed to improve data quality and model learning efficiency.
+- ### Removing Irrelevant Values
+Some values in the dataset may be irrelevant or too rare to contribute meaningful statistical insight. These values were examined and removed to improve data quality and model learning efficiency.
   
-- Label Encoding: Categorical features such as `gender` and `smoking_history` were encoded using **Label Encoding**, converting string labels into numeric form. This step is necessary because most machine learning algorithms require numerical input. Label encoding allows these categorical features to be used effectively in the modeling process while preserving ordinal relationships, if any.
+- ### Label Encoding
+Categorical features such as `gender` and `smoking_history` were encoded using **Label Encoding**, converting string labels into numeric form. This step is necessary because most machine learning algorithms require numerical input. Label encoding allows these categorical features to be used effectively in the modeling process while preserving ordinal relationships, if any.
 
-- Outliers handling: Outliers in numerical features like `bmi`, `HbA1c_level`, and `blood_glucose_level` were detected and treated using the **Interquartile Range (IQR)** method. Outliers can introduce noise and distort the learning process, reducing model accuracy. By managing these outliers, the model’s generalization performance is improved.
+- ### Outliers handling
+Outliers in numerical features like `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were detected and treated using the **Interquartile Range (IQR)** method. Outliers can introduce noise and distort the learning process, reducing model accuracy. By managing these outliers, the model’s generalization performance is improved.
 
-- Normalization: Numerical features including `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were scaled using **StandardScaler**. Normalization ensures that all features lie within the same scale range (typically 0 to 1), which is especially important for gradient-based optimization algorithms like Logistic Regression
+- ### Spliting the Dataset
+Before training the model, the dataset was divided into training and testing sets. To ensure reliable evaluation, 20% of the data was set aside for testing. The split was stratified based on the target variable (diabetes) to maintain the same class distribution in both training and testing sets, which is particularly important when dealing with imbalanced data. Additionally, a fixed random state was used during the split to make the results reproducible, allowing for consistent outcomes when running the model multiple times.
 
-- Spliting the Dataset: Before model training, the dataset was split into training and testing sets:
-  - **Test Size**: 20% of the data was allocated for testing to ensure a reliable evaluation.
-  - **Stratification**: The split was stratified based on the target variable (`diabetes`) to preserve its distribution in both sets, which is crucial for imbalanced datasets.
-  - **Random State**: A fixed random state was used to make the split reproducible.
+- ### Standardization
+Numerical features such as `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were transformed using StandardScaler. Standardization ensures that the data has a mean of 0 and a standard deviation of 1, rather than scaling the values to a range between 0 and 1. This is particularly important for gradient-based optimization algorithms like Logistic Regression, as standardized data can accelerate convergence.
   
 Each of these steps plays a vital role in transforming the raw data into a structured and clean form, enabling the machine learning model to learn patterns effectively and make accurate predictions.
 
