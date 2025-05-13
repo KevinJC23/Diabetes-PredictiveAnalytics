@@ -175,12 +175,11 @@ After evaluating all models based on test accuracy, the best performing model wa
 
 ## Evaluation
 ### Classification Report
-The classification report summarizes the precision, recall, f1-score, and accuracy of the models for each class. Here’s how we interpret these metrics:
-
-- **Precision**: Measures the accuracy of positive predictions. It tells us what proportion of predicted positives are actually correct.
-- **Recall**: Measures the ability of the model to identify positive instances. It tells us what proportion of actual positives were correctly predicted.
-- **F1-score**: The harmonic mean of precision and recall. It balances both precision and recall into a single metric.
-- **Support**: The number of actual occurrences of the class in the dataset.
+This report presents the evaluation metrics of each model's performance by summarizing the following: 
+- **Precision**: Measures the accuracy of positive predictions that made by the model. This metrics indicates the proportion of correctly predicted positive instances out of all predicted as positive.
+- **Recall**: Measures the ability of the model to identify positive instances. This metric indicates how many propositions from all of the positive examples that successfully detected by the model.
+- **F1-score**: The harmonic mean of both precision and recall, balancing both metrics into a single value. It's useful when dealing with dataset that has an imbalanced class distribution.
+- **Support**: The number of actual instances of each class in the dataset gives a view of the class proportion that was evaluated. Therefore, we can understand the data distribution on that model.
 
 #### LinearSVC
 
