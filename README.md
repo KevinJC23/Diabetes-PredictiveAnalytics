@@ -194,9 +194,9 @@ Here are the results of the comparison analysis from each model:
    macro avg       0.91      0.80      0.85     12650
 weighted avg       0.94      0.95      0.94     12650
 ```
-Based on this evaluation result, Class 0 (Non-diabetes) demonstrates 95% precision, indicating it correctly predicted the non-diabetes case. Additionally, the recall for the same class is 99%, meaning that the model accurately identified 99% of all non-diabetes instances, and the F1-Score for this class is 97%, which indicates a strong performance in identifying non-diabetes cases. For Class 1 (Diabetes), demonstrate 87% for the precision, signifying it predict cases were correct. However, the recall was 62%, indicating that the model was able to identify only 62% of the actual diabetes cases. Class 1 F1-Score demonstrates 72%, which shows a balanced measure of precision and recall, though it is relatively lower compared to Class 0. Overall, the model achieved an accuracy of 95%, a macro average F1-score of 0.85, and a weighted average F1-score of 0.94, highlighting its effectiveness in identifying non-diabetes cases while showing some limitations in correctly detecting diabetes.
+Based on this evaluation result, Class 0 (Non-diabetes) demonstrates 95% Precision, indicating it correctly predicted the non-diabetes case. Additionally, the Recall for the same class is 99%, meaning that the model accurately identified 99% of all non-diabetes instances, and the F1-Score for this class is 97%, which indicates a strong performance in identifying non-diabetes cases. For Class 1 (Diabetes), demonstrate 87% for the Precision, signifying it predict cases were correct. However, the Recall was 62%, indicating that the model was able to identify only 62% of the actual diabetes cases. Class 1 F1-Score demonstrates 72%, which shows a balanced measure of Precision and Recall, though it is relatively lower compared to Class 0. Overall, the model achieved an accuracy of 95%, a macro average F1-Score of 0.85, and a weighted average F1-Score of 0.94, highlighting its effectiveness in identifying non-diabetes cases while showing some limitations in correctly detecting diabetes.
 
-#### Logistic Regression
+- #### Logistic Regression
 
 ```
               precision    recall  f1-score   support
@@ -208,8 +208,7 @@ Based on this evaluation result, Class 0 (Non-diabetes) demonstrates 95% precisi
    macro avg       0.90      0.81      0.85     12650
 weighted avg       0.94      0.95      0.94     12650
 ```
-- Similar to LinearSVC, Logistic Regression also performs well on classifying non-diabetes, with high precision and recall.
-- However, its recall for diabetes cases (63%) is slightly better than LinearSVC’s recall (62%).
+Similar to LinearSVC, Logistic Regression also performs well in classifying Class 0 (Non-diabetes) cases, achieving 96% for Precision. Additionally, the Recall was also notably high at 99%, meaning the model successfully identified all Class 0 (Non-diabetes) instances. The F1-Score for this class is 97%, reflecting a strong balance between Precision and Recall. Class 1 (Diabetes) shows a precision of 85% of the predicted diabetes cases being accurate. The Recall for class 1 (Diabetes) is 63%, which is slightly better than LinearSVC's Recall of 62%, indicating that the model was able to accurately detect 63% of the real diabetes cases. The F1-score for this class is 73%, indicating an improved balance between precision and recall compared to LinearSVC. Overall, the model achieved an accuracy of 95%, a macro average F1-score of 0.85, and a weighted average F1-score of 0.94.
 
 #### Random Forest
 
