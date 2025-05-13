@@ -176,12 +176,13 @@ After evaluating all models based on test accuracy, the best performing model wa
 ## Evaluation
 ### Classification Report
 This report presents the evaluation metrics of each model's performance by summarizing the following: 
-- **Precision**: Measures the accuracy of positive predictions that made by the model. This metrics indicates the proportion of correctly predicted positive instances out of all predicted as positive.
+- **Precision**: Measures the accuracy of positive predictions made by the model. This metric indicates the proportion of correctly predicted positive instances out of all predicted as positive.
 - **Recall**: Measures the ability of the model to identify positive instances. This metric indicates how many propositions from all of the positive examples that successfully detected by the model.
-- **F1-score**: The harmonic mean of both precision and recall, balancing both metrics into a single value. It's useful when dealing with dataset that has an imbalanced class distribution.
+- **F1-score**: The harmonic mean of both precision and recall, balancing both metrics into a single value. It's useful when dealing with a dataset that has an imbalanced class distribution.
 - **Support**: The number of actual instances of each class in the dataset gives a view of the class proportion that was evaluated. Therefore, we can understand the data distribution on that model.
 
-#### LinearSVC
+Here are the results of the comparison analysis from each model:
+- #### LinearSVC
 
 ```
               precision    recall  f1-score   support
@@ -193,10 +194,7 @@ This report presents the evaluation metrics of each model's performance by summa
    macro avg       0.91      0.80      0.85     12650
 weighted avg       0.94      0.95      0.94     12650
 ```
-- **Precision for Class 0 (Non-Diabetes)**: 95%, meaning 95% of the time, the model correctly predicted non-diabetes cases.
-- **Recall for Class 0**: 99%, meaning the model correctly identified 99% of all non-diabetes cases.
-- **Precision for Class 1 (Diabetes)**: 87%, showing that 87% of diabetes predictions were correct.
-- **Recall for Class 1**: 62%, meaning the model only identified 62% of actual diabetes cases.
+Based on this evaluation result, Class 0 (Non-diabetes) demonstrates 95% precision, indicating it correctly predicted the non-diabetes case. Additionally, the recall for the same class is 99%, meaning that the model accurately identified 99% of all non-diabetes instances, and the F1-Score for this class is 97%, which indicates a strong performance in identifying non-diabetes cases. For Class 1 (Diabetes), demonstrate 87% for the precision, signifying it predict cases were correct. However, the recall was 62%, indicating that the model was able to identify only 62% of the actual diabetes cases. Class 1 F1-Score demonstrates 72%, which shows a balanced measure of precision and recall, though it is relatively lower compared to Class 0. Overall, the model achieved an accuracy of 95%, a macro average F1-score of 0.85, and a weighted average F1-score of 0.94, highlighting its effectiveness in identifying non-diabetes cases while showing some limitations in correctly detecting diabetes.
 
 #### Logistic Regression
 
