@@ -80,24 +80,24 @@ This part displays the statistical summary of each column on the dataset's numer
 This part presenting the visualization using bar chart or pie chart from distribution in each categorical feature.
 
 - #### Bar Chart for Gender Distribution
-![Gender Distribution](src/gender.png)
+![gender](https://github.com/user-attachments/assets/7c3d5b92-ff49-4c3e-8325-1def51199e3e)
 
-This histogram shows that the number of females (approximately 60%) significantly exceeds the number of males (approximately 40%). Additionally, there is a small number of 'Other' labels, and it doesn't provide significant insight for modelling. For this reason, it might be removed from the dataset to simplify the analysis and help reduce noise and increase model interpretability. After removal, the data remains well-distributed between males and females, eliminating the need for additional balancing.
+The distribution reveals the other category has a value that approximates to 0, in contrast to the female category, which approximates 58,000 instances, and the male category, which registers around 40,000. As the other label holds no utility for the intended modelling process, its deletion will be necessary.
 
 - #### Bar Chart for Smoking History Distribution
-![Smoking History Distribution](src/smoking_history.png)
+![smoking_history](https://github.com/user-attachments/assets/c57084ce-15cb-4c44-bedf-72af41c89c62)
 
-This histogram shows that the majority of data for 'No Info' labels (approximately 70%), 'Never' labels (approximately 70%), and the other label that represents a relatively small portion of data is distributed among the categories 'former', 'current', 'not current', and 'ever' (approximately 30%). Since the 'Never' labels are still essential for the analysis, it should be retained. However, the 'No Info' labels lack of interpretive value, it can removed to eliminate noise and enhance data quality. After doing this preprocessing, it could help to achieve a more balanced distribution, improved model performance, and interpretability.
+The resulting depiction highlights No Info as the most prevalent category, while others are markedly less frequent. Given that 'No Info' label likely denote missing or unavailable data, its unaddressed presence has the potential to introduce bias into the model. Following the removal for duplicate rows become 96,146, the dataset comprises ~60,000 entries, underscoring the need to assess the impact of retaining the 'No Info' category on subsequent modeling.
 
 - #### Pie Chart for Hypertension Distribution
-![Hypertension Distribution](src/hypertension.png)
+![hypertension](https://github.com/user-attachments/assets/807804f4-3a8c-46f1-8fce-b320a35914fa)
 
-This histogram shows that 92.5% of the data corresponds to individuals without hypertension (label 0), while 7.5% represent those with hypertension (label 1). The data distribution is similar to the heart disease dataset, where there is an imbalance in the classes. Although the imbalance is not as severe as in heart disease, it is still important to consider balancing techniques or methods more robust to data imbalance, such as XGBoost or Balanced Random Forest, to improve model performance and ensure more reliable predictions.
+The numerical encoding designates 0 as the absence of hypertension; In contrast, numerical encoding designates 1 as the indication of hypertension. These charts show that the majority are people who don't have hypertension. Considering that the 0 value accounts for 92.5% of the overall dataset composition, the implementation of undersampling is deemed inadvisable, as it would precipitate a substantial reduction in the total number of observations, potentially compromising the integrity of other columns.
 
 - #### Pie Chart for Heart Disease Distribution
-![Heart Disease Distribution](src/heart_disease.png)
+![heart_disease](https://github.com/user-attachments/assets/4a8fcd9c-1141-4f18-944b-b1a70b573706)
 
-This pie chart shows that the majority of data for individuals without heart disease (label 0) comprises approximately 96.1%, while the remaining 3.9% represents individuals with heart disease (label 1). Since the 'No heart disease' labels are more prevalent, they dominate the dataset. However, the 'Heart disease' labels, though representing a smaller portion of the data, are crucial for the analysis. To address this imbalance, techniques like oversampling (SMOTE), undersampling, or class weighting should be applied to improve the distribution. After preprocessing, these steps could lead to a more balanced dataset, improving model performance and interpretability.
+The numerical encoding designates 0 as the absence of heart disease; In contrast, numerical encoding designates 1 as the indication of heart disease. Regarding the distributional characteristics of hypertension, the application of undersampling is deemed imprudent due to the overwhelming prevalence of 0 values, comprising 96.1% of the overall dataset.
 
 ## Data Preparation
 This step is crucial to ensure that the dataset is clean, consistent, and suitable for machine learning algorithms. The following techniques were applied in the notebook, in the order they were executed:
