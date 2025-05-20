@@ -1,7 +1,9 @@
 # Machine Learning Project Report - Kevin Juan Carlos
 
 ## Project Domain
-Diabetes is the one global chronic disease that will have an impact on life quality and premature death. Based on research conducted by Takashima *et al*. (2024) in *Journal of Epidemiology*, diabetes significantly reduces healthy life expectancy in Japan—both men and women—and is categorized as influenced by risk factors such as blood pressure, body mass index (BMI), and smoking habits. According to the American Diabetes Association by Wild *et al*. (2004), diabetes prevalence sharply increases when people get older, making the older generation more vulnerable to this disease. Moreover, gender also plays a crucial role in the development of diabetes, as biological and hormonal differences contribute to variations in how men and women experience chronic illnesses such as diabetes (Regitz-Zagrosek, 2012). For example, men are more likely to develop diabetes at lower BMI values, while women with hormonal conditions like PCOS are at higher risk. This fact shows that diabetes cannot only cause physical complications but also shorten a person's disability lifespan. Therefore, early detection and intervention are even more essential to maintaining the quality of the community. Advancements in technology have enabled the utilization of Artificial Intelligence, particularly Machine Learning, which can be applied to predict the probability of people having diabetes based on their medical data. This project focuses on predictive analytics and aims to compare Machine Learning model classification to know what models can make the diagnosis process efficient and accurate.
+Diabetes is the one global chronic disease that will have an impact on life quality and premature death. Based on research conducted by Takashima *et al*. (2024) in *Journal of Epidemiology*, diabetes significantly reduces healthy life expectancy in Japan—both men and women—and is categorized as influenced by risk factors such as blood pressure, body mass index (BMI), and smoking habits. According to the American Diabetes Association by Wild *et al*. (2004), diabetes prevalence sharply increases when people get older, making the older generation more vulnerable to this disease. 
+
+Moreover, gender also plays a crucial role in the development of diabetes, as biological and hormonal differences contribute to variations in how men and women experience chronic illnesses such as diabetes (Regitz-Zagrosek, 2012). For example, men are more likely to develop diabetes at lower BMI values, while women with hormonal conditions like PCOS are at higher risk. This fact shows that diabetes cannot only cause physical complications but also shorten a person's disability lifespan. Therefore, early detection and intervention are even more essential to maintaining the quality of the community. Advancements in technology have enabled the utilization of Artificial Intelligence, particularly Machine Learning, which can be applied to predict the probability of people having diabetes based on their medical data. This project focuses on predictive analytics and aims to compare Machine Learning model classification to know what models can make the diagnosis process efficient and accurate.
 
 ## Business Understanding
 ### Problem Statements
@@ -132,31 +134,29 @@ The pairplot reveals a few notable patterns in the data. Individuals diagnosed w
 The correlation heatmap shows that HbA1c_level and blood_glucose_level have the strongest positive correlation with the target variable diabetes, with coefficients around 0.45 and 0.39 respectively. This aligns with known clinical indicators of diabetes. Other features such as age, bmi, and hypertension exhibit weak to very weak positive correlations with diabetes (less than 0.1), suggesting they might contribute less directly. Additionally, most features do not show strong correlations with each other, indicating minimal multicollinearity. Overall, the heatmap highlights HbA1c_level and blood_glucose_level as the most informative predictors for diabetes in this dataset.
 
 ## Modeling
-To solve the classification problem of predicting diabetes, we experimented with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
-### Models Used:
+To solve the classification problem of predicting diabetes, experiment conducted with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
+### Models Used
 - #### Linear Support Vector Classifier (LinearSVC)
-works by finding a hyperplane that best separates the data into two classes while maximizing the margin between them. This approach is particularly effective for high-dimensional datasets. We tuned two key hyperparameters: C, which controls the regularization strength (with lower values indicating stronger regularization), and max_iter, which sets the maximum number of iterations to ensure the algorithm converges. The tested values for C were [0.01, 0.1, 1, 10], and for max_iter were [1000, 2000]. The advantage of LinearSVC is its efficiency when handling high-dimensional data, and it trains relatively fast on smaller datasets. However, it assumes that the data is linearly separable and is sensitive to unscaled or noisy data.
+Works by finding a hyperplane that best separates the data into two classes while maximizing the margin between them. This approach is particularly effective for high-dimensional datasets. We tuned two key hyperparameters: C, which controls the regularization strength (with lower values indicating stronger regularization), and max_iter, which sets the maximum number of iterations to ensure the algorithm converges. The tested values for C were [0.01, 0.1, 1, 10], and for max_iter were [1000, 2000]. The advantage of LinearSVC is its efficiency when handling high-dimensional data, and it trains relatively fast on smaller datasets. However, it assumes that the data is linearly separable and is sensitive to unscaled or noisy data.
 
 - #### Logistic Regression
-predicts class membership probabilities using a logistic function, making it suitable for binary classification tasks. The hyperparameters tuned for Logistic Regression were C, which is the inverse of regularization strength, and solver, which determines the optimization algorithm used. The values tested for C were [0.01, 0.1, 1, 10], while the solver options included 'liblinear' and 'lbfgs'. Logistic Regression is simple, easy to interpret, and serves well as a baseline model, especially when proper regularization is applied. However, it assumes a linear relationship between features and the target, which can be limiting when dealing with non-linear data distributions.
+Predicts class membership probabilities using a logistic function, making it suitable for binary classification tasks. The hyperparameters tuned for Logistic Regression were C, which is the inverse of regularization strength, and solver, which determines the optimization algorithm used. The values tested for C were [0.01, 0.1, 1, 10], while the solver options included 'liblinear' and 'lbfgs'. Logistic Regression is simple, easy to interpret, and serves well as a baseline model, especially when proper regularization is applied. However, it assumes a linear relationship between features and the target, which can be limiting when dealing with non-linear data distributions.
 
 - #### Random Forest
-works by constructing a large number of decision trees during training and outputting the most common class as the final prediction. This method captures complex relationships and feature interactions effectively. The key hyperparameters tuned were n_estimators (number of trees), max_depth (maximum depth of each tree), and min_samples_split (minimum samples required to split a node). We experimented with n_estimators values of [50, 100, 150], max_depth values of [10, 16, 20], and min_samples_split values of [2, 5]. The strength of Random Forest lies in its ability to handle non-linear relationships and feature interactions, making it robust to outliers and missing values. However, it can be slower to train when using a large number of trees and is generally harder to interpret compared to linear models.
+Works by constructing a large number of decision trees during training and outputting the most common class as the final prediction. This method captures complex relationships and feature interactions effectively. The key hyperparameters tuned were n_estimators (number of trees), max_depth (maximum depth of each tree), and min_samples_split (minimum samples required to split a node). We experimented with n_estimators values of [50, 100, 150], max_depth values of [10, 16, 20], and min_samples_split values of [2, 5]. The strength of Random Forest lies in its ability to handle non-linear relationships and feature interactions, making it robust to outliers and missing values. However, it can be slower to train when using a large number of trees and is generally harder to interpret compared to linear models.
 
 - #### AdaBoost Classifier
-combines multiple weak classifiers (typically decision trees) to build a stronger predictive model. The model iteratively focuses on instances that are harder to classify correctly. The hyperparameters tuned were n_estimators, representing the number of boosting stages, and learning_rate, which reduces the weight of each weak learner’s contribution. The tested values for n_estimators were [50, 100, 200], and for learning_rate, they were [0.001, 0.01, 0.1]. AdaBoost is particularly useful when dealing with imbalanced datasets and often yields improved accuracy by combining weak learners. However, it can be sensitive to noisy data and outliers, and if not tuned properly, it may overfit.
+Combines multiple weak classifiers (typically decision trees) to build a stronger predictive model. The model iteratively focuses on instances that are harder to classify correctly. The hyperparameters tuned were n_estimators, representing the number of boosting stages, and learning_rate, which reduces the weight of each weak learner’s contribution. The tested values for n_estimators were [50, 100, 200], and for learning_rate, they were [0.001, 0.01, 0.1]. AdaBoost is particularly useful when dealing with imbalanced datasets and often yields improved accuracy by combining weak learners. However, it can be sensitive to noisy data and outliers, and if not tuned properly, it may overfit.
 
-After evaluating all models, we summarized their performance as follows: LinearSVC achieved a training accuracy of 94.81% and a test accuracy of 94.73%, while Logistic Regression achieved 94.76% training accuracy and 94.71% test accuracy. Random Forest performed the best, with 96.38% training accuracy and 96.31% test accuracy, followed closely by AdaBoost, which had 96.27% training accuracy and 96.30% test accuracy.
-
-### Model Performance Summary:
-| Model               | Train Accuracy | Test Accuracy |
+### Model Performance Summary
+| Model              | Train Accuracy | Test Accuracy  |
 |--------------------|----------------|----------------|
 | LinearSVC          | 0.9481         | 0.9473         |
 | LogisticRegression | 0.9476         | 0.9471         |
 | RandomForest       | 0.9638         | 0.9631         |
-| Boosting (AdaBoost)| 0.9627         | 0.9630         |
+| AdaBoost           | 0.9627         | 0.9630         |
 
-In conclusion, the Random Forest model was chosen as the final solution due to its superior performance, robust handling of both numerical and categorical features, and minimal overfitting. Its ability to capture complex patterns without requiring feature scaling made it the most suitable model for this classification problem. The close performance of AdaBoost also indicated that boosting techniques are effective, especially in managing imbalanced data.
+In conclusion, the obtained model performance results demonstrate that all four models achieve elevated accuracy on both the training and testing datasets. Notably, LinearSVC and LogisticRegression show slightly diminished accuracy (94%) relative to RandomForest and AdaBoosting (96%). Consequently, these outcomes suggest a slightly more robust and reliable outcome for this particular prediction task.
 
 ## Evaluation
 ### Classification Report
@@ -179,7 +179,6 @@ Here are the results of the comparison analysis from each model:
    macro avg       0.91      0.80      0.85     12650
 weighted avg       0.94      0.95      0.94     12650
 ```
-Based on this evaluation result, Class 0 (Non-diabetes) demonstrates 95% Precision, indicating it correctly predicted the non-diabetes case. Additionally, the Recall for the same class is 99%, meaning that the model accurately identified 99% of all non-diabetes instances, and the F1-Score for this class is 97%, which indicates a strong performance in identifying non-diabetes cases. For Class 1 (Diabetes), demonstrate 87% for the Precision, signifying it predict cases were correct. However, the Recall was 62%, indicating that the model was able to identify only 62% of the actual diabetes cases. Class 1 F1-Score demonstrates 72%, which shows a balanced measure of Precision and Recall, though it is relatively lower compared to Class 0. Overall, the model achieved an accuracy of 95%, a macro average F1-Score of 0.85, and a weighted average F1-Score of 0.94, highlighting its effectiveness in identifying non-diabetes cases while showing some limitations in correctly detecting diabetes.
 
 - #### Logistic Regression
 
@@ -193,7 +192,6 @@ Based on this evaluation result, Class 0 (Non-diabetes) demonstrates 95% Precisi
    macro avg       0.90      0.81      0.85     12650
 weighted avg       0.94      0.95      0.94     12650
 ```
-Similar to LinearSVC, Logistic Regression also performs well in classifying Class 0 (Non-diabetes) cases, achieving 96% for Precision, indicating it correctly predicted the non-diabetes case. Additionally, the Recall was also notably high at 99%, meaning the model successfully identified all Class 0 (Non-diabetes) instances. The F1-Score for this class is 97%, reflecting a strong balance between Precision and Recall. Class 1 (Diabetes) shows a precision of 85% of the predicted diabetes cases being accurate. The Recall for class 1 (Diabetes) is 63%, which is slightly better than LinearSVC's Recall of 62%, indicating that the model was able to accurately detect 63% of the real diabetes cases. The F1-score for this class is 73%, indicating an improved balance between precision and recall compared to LinearSVC. Overall, the model achieved an accuracy of 95%, a macro average F1-score of 0.85, and a weighted average F1-score of 0.94.
 
 #### Random Forest
 
@@ -207,10 +205,6 @@ Similar to LinearSVC, Logistic Regression also performs well in classifying Clas
    macro avg       0.98      0.83      0.89     12650
 weighted avg       0.96      0.96      0.96     12650
 ```
-
-- **Precision for Class 0**: 96%, showing it makes accurate predictions for non-diabetes.
-- **Recall for Class 0**: 100%, demonstrating that Random Forest correctly identifies all non-diabetes cases.
-- **Precision for Class 1**: 100%, which is excellent, but this comes at the cost of lower recall (67%) for diabetes. This means Random Forest is more confident when predicting diabetes, but it may miss some cases.
 
 #### AdaBoost (Boosting)
 
@@ -226,35 +220,30 @@ weighted avg       0.96      0.96      0.96     12650
 weighted avg       0.96      0.96      0.96     12650
 ```
 
-- AdaBoost also shows very high precision for non-diabetes (96%) and perfect recall for non-diabetes (100%).
-- Similar to Random Forest, it shows a high precision (100%) for diabetes, but lower recall (67%).
+Despite achieving high accuracy (95-96%), indicating that they are able to correctly classify the majority of the data overall. However, differences in performance are more apparent in the recall and F1-score metrics, especially for the minority class.
 
 ### Confusion Matrix
 
-The **confusion matrix** helps visualize the performance of a classification model by displaying the true positives (TP), false positives (FP), true negatives (TN), and false negatives (FN).
+The **confusion matrix** helps visualize the performance of a classification model by displaying the true positives (TP), false positives (FP), true negatives (TN), and false negatives (FN). It provides insight into the type of errors each model makes and are crucial for understanding trade-offs between precision and recall.
 
 - **True Positive (TP)**: Correctly predicted positive outcomes (diabetes).
 - **False Positive (FP)**: Incorrectly predicted positive outcomes (non-diabetes predicted as diabetes).
 - **True Negative (TN)**: Correctly predicted negative outcomes (non-diabetes).
 - **False Negative (FN)**: Incorrectly predicted negative outcomes (diabetes predicted as non-diabetes).
 
-**Confusion matrices** provide insights into the type of errors each model makes and are crucial for understanding trade-offs between precision and recall.
+- #### **LinearSVC Confusion Matrix**
+![LinearSVC](https://github.com/user-attachments/assets/38292905-efcd-4542-810c-27e9ae378f64)
 
-- **LinearSVC Confusion Matrix**
+- #### **Logistic Regression Confusion Matrix**
+![LogisticRegression](https://github.com/user-attachments/assets/0ce47040-32d8-45e5-8a48-b36545e88354)
   
-  ![LinearSVC Confusion Matrix](src/LinearSVC.png)
-  
-- **Logistic Regression Confusion Matrix**
-  
-  ![Logistic Regression Confusion Matrix](src/LogisticRegression.png)
-  
-- **Random Forest Confusion Matrix**
-  
-  ![Random Forest Confusion Matrix](src/RandomForest.png)
-  
-- **AdaBoost Confusion Matrix**
-  
-  ![AdaBoosting Confusion Matrix](src/Boosting.png)
+- #### **Random Forest Confusion Matrix**
+![RandomForest](https://github.com/user-attachments/assets/0a7b1276-f630-4f49-9537-29e186be48f1)
+
+- #### **AdaBoost Confusion Matrix**
+![download (1)](https://github.com/user-attachments/assets/ae035796-7381-4f57-b33d-bc2afa92acb1)
+
+The comparative analysis reveals the performance of **AdaBoost** for all aspects is assessed, notably eliminating false positives and achieving a higher degree of accuracy. However, **RandomForest** has a higher recall than **AdaBoost**. Both **LinearSVC** and **LogisticRegression** demonstrate a weakness in predicting positive cases, resulting in lower recall values.
 
 ### ROC-AUC
 
@@ -263,7 +252,21 @@ The **ROC-AUC (Receiver Operating Characteristic - Area Under Curve)** is a perf
 - **ROC Curve**: A plot of the true positive rate (recall) against the false positive rate.
 - **AUC (Area Under Curve)**: A measure of how well the model distinguishes between classes. The higher the AUC, the better the model’s ability to differentiate between the positive and negative classes.
 
-![ROC-AUC](src/ROC-AUC.png)
+![ROC-AUC](https://github.com/user-attachments/assets/7b89f53b-b94c-4989-8d4a-12132a2a2148)
+
+
+Based on the observed results, both RandomForest and AdaBoost emerged as effective diabetes detection within this dataset. Conversely, LinearSVC and LogisticRegression, while offering the advantage of simplicity and speed, may still be considered as alternative approaches.
+
+## Conclusion
+Based on the evaluation result of the Machine Learning models created in this extend, all the laid out issue articulations have been successfully addressed utilizing well-aligned methodologies that reflect the overarching trade objective, which is improving the precision and effectiveness of early diabetes risk location.
+
+To start with, the show effectively predicts diabetes hazard utilizing key factors such as blood weight, BMI, smoking propensities, age, and sex. This directly reacts to the primary issue articulation, and moreover contributes to the objective of distinguishing and understanding the essential risk factors affecting diabetes onset. The discoveries highlight that numerical highlights like BMI, HbA1c_level, and blood_glucose_level play a especially powerful part within the model's predictive capability.
+
+Moreover, the usage of different Machine Learning calculations has clearly illustrated their potential to improve symptomatic accuracy. By assessing the execution of four unmistakable algorithms—LinearSVC, Direct Relapse, Irregular Woodland, and AdaBoost—the extend gives profitable insights into the qualities and confinements of each strategy when connected to therapeutic information. This does not, as it were, fulfill the moment issue explanation, but also underpins the objective of creating a vigorous and dependable forecast framework.
+
+In terms of show execution, Irregular Timberland and AdaBoost rose as the foremost successful algorithms, conveying higher precision and way better generalization on inconspicuous test information compared to LinearSVC and Direct Relapse. This result addresses the third issue explanation and emphasizes which strategies are most reasonable for supporting the restorative determination handling. The use of hyperparameter tuning through GridSearchCV and RandomizedSearchCV assists in refining show results, approving the adequacy of the proposed arrangement methodologies.
+
+In conclusion, the end-to-end process—from preprocessing and including change to demonstrate optimization—has altogether contributed to the realization of the project's commercial objective. The ultimate result may be a data-driven decision support device planned to help healthcare experts in recognizing diabetes dangers at an prior arrange, empowering quicker, more precise, and eventually more impactful therapeutic interventions.
 
 ## References
 Wild, S., Roglic, G., Green, A., Sicree, R., & King, H. (2004). Global prevalence of diabetes. Diabetes Care, 27(5), 1047–1053. https://doi.org/10.2337/diacare.27.5.1047
