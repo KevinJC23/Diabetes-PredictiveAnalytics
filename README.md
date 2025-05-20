@@ -87,7 +87,7 @@ The distribution reveals the other category has a value that approximates to 0, 
 - #### Bar Chart for Smoking History Distribution
 ![smoking_history](https://github.com/user-attachments/assets/c57084ce-15cb-4c44-bedf-72af41c89c62)
 
-The resulting depiction highlights No Info as the most prevalent category, while others are markedly less frequent. Given that 'No Info' label likely denote missing or unavailable data, its unaddressed presence has the potential to introduce bias into the model. Following the removal for duplicate rows become 96,146, the dataset comprises ~60,000 entries, underscoring the need to assess the impact of retaining the 'No Info' category on subsequent modeling.
+The resulting depiction highlights 'No Info' as the most prevalent category, while others are markedly less frequent. Given that 'No Info' label likely denote missing or unavailable data, its unaddressed presence has the potential to introduce bias into the model. Following the removal for duplicate rows become 96,146, the dataset comprises ~60,000 entries, underscoring the need to assess the impact of retaining the 'No Info' category on subsequent modeling.
 
 - #### Pie Chart for Hypertension Distribution
 ![hypertension](https://github.com/user-attachments/assets/807804f4-3a8c-46f1-8fce-b320a35914fa)
