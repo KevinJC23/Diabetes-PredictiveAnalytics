@@ -115,6 +115,22 @@ Before training the model, the dataset was split into training and testing subse
 ### Standardization
 Feature standardization was applied using StandardScaler, which transforms numerical features such as `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` to have a mean of 0 and a standard deviation of 1, rather than scaling the values to a fixed range. Importantly, the scaler was fitted only on the training data (X_train) to avoid data leakage, and then applied to both the training and test sets. This approach improves model performance and ensures fair evaluation by preserving the integrity of unseen test data.
 
+### Visualization
+- #### Examine the boxplot of each feature and ensure outliers have been properly handled
+![Boxplot](https://github.com/user-attachments/assets/c5c5ae61-0a04-4398-8b08-8eba851b1d17)
+
+The boxplots reveal that most numerical features such as age, BMI, HbA1c level, and blood glucose level contain some outliers, particularly on the higher end, indicating possible extreme values that may need further investigation or treatment. Categorical or binary features like gender, hypertension, heart disease, and diabetes appear well-distributed without apparent outliers, which is expected given their limited value range. Notably, the smoking_history feature, although numeric, shows variability that suggests it may represent encoded categorical data, with a few outliers at the lower end. Overall, while categorical features are clean, numerical features might benefit from outlier handling to improve model performance.
+
+- #### Explore relationships between each feature using pairplot
+![Pairplot](https://github.com/user-attachments/assets/8ba363e9-9598-412a-b61c-e029605d1971)
+
+The pairplot reveals a few notable patterns in the data. Individuals diagnosed with diabetes (diabetes = 1) tend to have higher HbA1c and blood glucose levels, which aligns with medical expectations, indicating these features are strong indicators of diabetes. There is no clear linear relationship between age or BMI with diabetes, although slight clustering suggests that older individuals and those with higher BMI may have a higher risk. The distribution of HbA1c and blood glucose levels is more skewed for diabetic individuals, while non-diabetic cases are more concentrated at lower values. Overall, HbA1c and blood glucose levels show the strongest visual separation between diabetic and non-diabetic groups.
+
+- #### Analyze the correlation between features using heatmap
+![Heatmap](https://github.com/user-attachments/assets/5aa38f4f-7821-453e-93b6-a60b62f1b021)
+
+The correlation heatmap shows that HbA1c_level and blood_glucose_level have the strongest positive correlation with the target variable diabetes, with coefficients around 0.45 and 0.39 respectively. This aligns with known clinical indicators of diabetes. Other features such as age, bmi, and hypertension exhibit weak to very weak positive correlations with diabetes (less than 0.1), suggesting they might contribute less directly. Additionally, most features do not show strong correlations with each other, indicating minimal multicollinearity. Overall, the heatmap highlights HbA1c_level and blood_glucose_level as the most informative predictors for diabetes in this dataset.
+
 ## Modeling
 To solve the classification problem of predicting diabetes, we experimented with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
 ### Models Used:
