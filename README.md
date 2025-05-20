@@ -100,26 +100,20 @@ The numerical encoding designates 0 as the absence of hypertension; In contrast,
 The numerical encoding designates 0 as the absence of heart disease; In contrast, numerical encoding designates 1 as the indication of heart disease. Regarding the distributional characteristics of hypertension, the application of undersampling is deemed imprudent due to the overwhelming prevalence of 0 values, comprising 96.1% of the overall dataset.
 
 ## Data Preparation
-This step is crucial to ensure that the dataset is clean, consistent, and suitable for machine learning algorithms. The following techniques were applied in the notebook, in the order they were executed:
 ### Dropping Duplicate Records
-Duplicate rows in the dataset can skew the model by overrepresenting certain patterns. To ensure that each instance in the training data is unique and to prevent bias and overfitting, duplicate entries were identified and removed.
-  
-### Removing Irrelevant Values
-Some values in the dataset may be irrelevant or too rare to contribute meaningful statistical insight. These values were examined and removed to improve data quality and model learning efficiency.
+Entries with irrelevant, unclear, or overly rare values—such as the "Other" category in the `gender` column, "No Info" in the `smoking_history` column, and duplicate rows that could skew the model by overrepresenting certain patterns—were identified and removed to improve data quality, reduce noise and bias, enhance model learning efficiency, and prevent overfitting by maintaining only meaningful and unique instances in the training data.
   
 ### Label Encoding
-Categorical features such as `gender` and `smoking_history` were encoded using **Label Encoding**, converting string labels into numeric form. This step is necessary because most machine learning algorithms require numerical input. Label encoding allows these categorical features to be used effectively in the modeling process while preserving ordinal relationships, if any.
+Categorical features such as `gender` and `smoking_history` were encoded using Label Encoding with `LabelEncoder`, converting string labels into numeric form to allow these features to be used effectively in the modeling process, as most machine learning algorithms require numerical input and label encoding preserves any potential ordinal relationships.
 
 ### Outliers handling
-Outliers in numerical features like `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were detected and treated using the **Interquartile Range (IQR)** method. Outliers can introduce noise and distort the learning process, reducing model accuracy. By managing these outliers, the model’s generalization performance is improved.
+Outliers in numerical features such as `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were detected and treated using the Interquartile Range (IQR) method, which calculates the lower and upper bounds based on the `1.5 * IQR` rule and caps values outside this range to the nearest acceptable limit; this approach helps reduce noise and distortion during the learning process, thereby improving the model’s generalization performance.
 
-### Spliting the Dataset
-Before training the model, the dataset was divided into training and testing sets. To ensure reliable evaluation, 20% of the data was set aside for testing. The split was stratified based on the target variable (diabetes) to maintain the same class distribution in both training and testing sets, which is particularly important when dealing with imbalanced data. Additionally, a fixed random state was used during the split to make the results reproducible, allowing for consistent outcomes when running the model multiple times.
+### Split the Dataset
+Before training the model, the dataset was split into training and testing subsets using an 80:20 ratio with `train_test_split`, where the features (X) were separated from the target variable (y), and stratification based on the target (diabetes) was applied to maintain the original class distribution in both sets—an essential step when handling imbalanced data. Additionally, a fixed random state was used to ensure reproducibility, allowing consistent results across multiple runs of the model.
 
 ### Standardization
-Numerical features such as `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` were transformed using StandardScaler. Standardization ensures that the data has a mean of 0 and a standard deviation of 1, rather than scaling the values to a range between 0 and 1. This is particularly important for gradient-based optimization algorithms like Logistic Regression, as standardized data can accelerate convergence.
-  
-Each of these steps plays a vital role in transforming the raw data into a structured and clean form, enabling the machine learning model to learn patterns effectively and make accurate predictions.
+Feature standardization was applied using StandardScaler, which transforms numerical features such as age, bmi, HbA1c_level, and blood_glucose_level to have a mean of 0 and a standard deviation of 1, rather than scaling the values to a fixed range. Importantly, the scaler was fitted only on the training data (X_train) to avoid data leakage, and then applied to both the training and test sets. This approach improves model performance and ensures fair evaluation by preserving the integrity of unseen test data.
 
 ## Modeling
 To solve the classification problem of predicting diabetes, we experimented with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
