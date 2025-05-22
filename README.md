@@ -101,6 +101,24 @@ The numerical encoding designates 0 as the absence of hypertension; In contrast,
 
 The numerical encoding designates 0 as the absence of heart disease; In contrast, numerical encoding designates 1 as the indication of heart disease. Regarding the distributional characteristics of hypertension, the application of undersampling is deemed imprudent due to the overwhelming prevalence of 0 values, comprising 96.1% of the overall dataset.
 
+### Data Preparation Visualization
+This part presenting the visualization after data preprocessing.
+
+- #### Examine the boxplot of each feature and ensure outliers have been properly handled
+![Boxplot](https://github.com/user-attachments/assets/c5c5ae61-0a04-4398-8b08-8eba851b1d17)
+
+The boxplots reveal that most numerical features such as age, BMI, HbA1c level, and blood glucose level contain some outliers, particularly on the higher end, indicating possible extreme values that may need further investigation or treatment. Categorical or binary features like gender, hypertension, heart disease, and diabetes appear well-distributed without apparent outliers, which is expected given their limited value range. Notably, the smoking_history feature, although numeric, shows variability that suggests it may represent encoded categorical data, with a few outliers at the lower end. Overall, while categorical features are clean, numerical features might benefit from outlier handling to improve model performance.
+
+- #### Explore relationships between each feature using pairplot
+![Pairplot](https://github.com/user-attachments/assets/8ba363e9-9598-412a-b61c-e029605d1971)
+
+The pairplot reveals a few notable patterns in the data. Individuals diagnosed with diabetes (diabetes = 1) tend to have higher HbA1c and blood glucose levels, which aligns with medical expectations, indicating these features are strong indicators of diabetes. There is no clear linear relationship between age or BMI with diabetes, although slight clustering suggests that older individuals and those with higher BMI may have a higher risk. The distribution of HbA1c and blood glucose levels is more skewed for diabetic individuals, while non-diabetic cases are more concentrated at lower values. Overall, HbA1c and blood glucose levels show the strongest visual separation between diabetic and non-diabetic groups.
+
+- #### Analyze the correlation between features using heatmap
+![Heatmap](https://github.com/user-attachments/assets/5aa38f4f-7821-453e-93b6-a60b62f1b021)
+
+The correlation heatmap shows that HbA1c_level and blood_glucose_level have the strongest positive correlation with the target variable diabetes, with coefficients around 0.45 and 0.39 respectively. This aligns with known clinical indicators of diabetes. Other features such as age, bmi, and hypertension exhibit weak to very weak positive correlations with diabetes (less than 0.1), suggesting they might contribute less directly. Additionally, most features do not show strong correlations with each other, indicating minimal multicollinearity. Overall, the heatmap highlights HbA1c_level and blood_glucose_level as the most informative predictors for diabetes in this dataset.
+
 ## Data Preparation
 ### Dropping Duplicate Records
 Entries with irrelevant, unclear, or overly rare values—such as the "Other" category in the `gender` column, "No Info" in the `smoking_history` column, and duplicate rows that could skew the model by overrepresenting certain patterns—were identified and removed to improve data quality, reduce noise and bias, enhance model learning efficiency, and prevent overfitting by maintaining only meaningful and unique instances in the training data.
@@ -117,37 +135,22 @@ Before training the model, the dataset was split into training and testing subse
 ### Standardization
 Feature standardization was applied using StandardScaler, which transforms numerical features such as `age`, `bmi`, `HbA1c_level`, and `blood_glucose_level` to have a mean of 0 and a standard deviation of 1, rather than scaling the values to a fixed range. Importantly, the scaler was fitted only on the training data (X_train) to avoid data leakage, and then applied to both the training and test sets. This approach improves model performance and ensures fair evaluation by preserving the integrity of unseen test data.
 
-### Visualization
-- #### Examine the boxplot of each feature and ensure outliers have been properly handled
-![Boxplot](https://github.com/user-attachments/assets/c5c5ae61-0a04-4398-8b08-8eba851b1d17)
-
-The boxplots reveal that most numerical features such as age, BMI, HbA1c level, and blood glucose level contain some outliers, particularly on the higher end, indicating possible extreme values that may need further investigation or treatment. Categorical or binary features like gender, hypertension, heart disease, and diabetes appear well-distributed without apparent outliers, which is expected given their limited value range. Notably, the smoking_history feature, although numeric, shows variability that suggests it may represent encoded categorical data, with a few outliers at the lower end. Overall, while categorical features are clean, numerical features might benefit from outlier handling to improve model performance.
-
-- #### Explore relationships between each feature using pairplot
-![Pairplot](https://github.com/user-attachments/assets/8ba363e9-9598-412a-b61c-e029605d1971)
-
-The pairplot reveals a few notable patterns in the data. Individuals diagnosed with diabetes (diabetes = 1) tend to have higher HbA1c and blood glucose levels, which aligns with medical expectations, indicating these features are strong indicators of diabetes. There is no clear linear relationship between age or BMI with diabetes, although slight clustering suggests that older individuals and those with higher BMI may have a higher risk. The distribution of HbA1c and blood glucose levels is more skewed for diabetic individuals, while non-diabetic cases are more concentrated at lower values. Overall, HbA1c and blood glucose levels show the strongest visual separation between diabetic and non-diabetic groups.
-
-- #### Analyze the correlation between features using heatmap
-![Heatmap](https://github.com/user-attachments/assets/5aa38f4f-7821-453e-93b6-a60b62f1b021)
-
-The correlation heatmap shows that HbA1c_level and blood_glucose_level have the strongest positive correlation with the target variable diabetes, with coefficients around 0.45 and 0.39 respectively. This aligns with known clinical indicators of diabetes. Other features such as age, bmi, and hypertension exhibit weak to very weak positive correlations with diabetes (less than 0.1), suggesting they might contribute less directly. Additionally, most features do not show strong correlations with each other, indicating minimal multicollinearity. Overall, the heatmap highlights HbA1c_level and blood_glucose_level as the most informative predictors for diabetes in this dataset.
-
 ## Modeling
 To solve the classification problem of predicting diabetes, experiment conducted with four different machine learning models. Each model underwent hyperparameter tuning using GridSearchCV to achieve optimal performance. Below is a detailed explanation of the modeling process, evaluation, and reasoning behind the model selection.
 ### Models Used
 - #### Linear Support Vector Classifier (LinearSVC)
-Works by finding a hyperplane that best separates the data into two classes while maximizing the margin between them. This approach is particularly effective for high-dimensional datasets. We tuned two key hyperparameters: C, which controls the regularization strength (with lower values indicating stronger regularization), and max_iter, which sets the maximum number of iterations to ensure the algorithm converges. The tested values for C were [0.01, 0.1, 1, 10], and for max_iter were [1000, 2000]. The advantage of LinearSVC is its efficiency when handling high-dimensional data, and it trains relatively fast on smaller datasets. However, it assumes that the data is linearly separable and is sensitive to unscaled or noisy data.
+Works by finding a hyperplane that best separates the data into two classes while maximizing the margin between them. This approach is particularly effective for high-dimensional datasets. We tuned two key hyperparameters: C, which controls the regularization strength (with lower values indicating stronger regularization), and max_iter, which sets the maximum number of iterations to ensure the algorithm converges. The tested values for C were [0.01, 0.1, 1, 10], and for max_iter were [1000, 2000]. After hyperparameter tuning using GridSearchCV, the best parameters found for LinearSVC were ```C=1``` and ```max_iter=1000```.The advantage of LinearSVC is its efficiency when handling high-dimensional data, and it trains relatively fast on smaller datasets. However, it assumes that the data is linearly separable and is sensitive to unscaled or noisy data.
 
 - #### Logistic Regression
-Predicts class membership probabilities using a logistic function, making it suitable for binary classification tasks. The hyperparameters tuned for Logistic Regression were C, which is the inverse of regularization strength, and solver, which determines the optimization algorithm used. The values tested for C were [0.01, 0.1, 1, 10], while the solver options included 'liblinear' and 'lbfgs'. Logistic Regression is simple, easy to interpret, and serves well as a baseline model, especially when proper regularization is applied. However, it assumes a linear relationship between features and the target, which can be limiting when dealing with non-linear data distributions.
+Predicts class membership probabilities using a logistic function, making it suitable for binary classification tasks. The hyperparameters tuned for Logistic Regression were C, which is the inverse of regularization strength, and solver, which determines the optimization algorithm used. The values tested for C were [0.01, 0.1, 1, 10], while the solver options included 'liblinear' and 'lbfgs'. After hyperparameter tuning using GridSearchCV, the best parameters found for Logistic Regression were ```C=0.1``` and ```solver='liblinear'```. Logistic Regression is simple, easy to interpret, and serves well as a baseline model, especially when proper regularization is applied. However, it assumes a linear relationship between features and the target, which can be limiting when dealing with non-linear data distributions.
 
 - #### Random Forest
-Works by constructing a large number of decision trees during training and outputting the most common class as the final prediction. This method captures complex relationships and feature interactions effectively. The key hyperparameters tuned were n_estimators (number of trees), max_depth (maximum depth of each tree), and min_samples_split (minimum samples required to split a node). We experimented with n_estimators values of [50, 100, 150], max_depth values of [10, 16, 20], and min_samples_split values of [2, 5]. The strength of Random Forest lies in its ability to handle non-linear relationships and feature interactions, making it robust to outliers and missing values. However, it can be slower to train when using a large number of trees and is generally harder to interpret compared to linear models.
+Works by constructing a large number of decision trees during training and outputting the most common class as the final prediction. This method captures complex relationships and feature interactions effectively. The key hyperparameters tuned were n_estimators (number of trees), max_depth (maximum depth of each tree), and min_samples_split (minimum samples required to split a node). We experimented with n_estimators values of [50, 100, 150], max_depth values of [10, 16, 20], and min_samples_split values of [2, 5]. After hyperparameter tuning using GridSearchCV, the best parameters found for Random Forest were ```max_depth=10```, ```min_samples_split=2```, and ```n_estimators=50```. The strength of Random Forest lies in its ability to handle non-linear relationships and feature interactions, making it robust to outliers and missing values. However, it can be slower to train when using a large number of trees and is generally harder to interpret compared to linear models.
 
 - #### AdaBoost Classifier
-Combines multiple weak classifiers (typically decision trees) to build a stronger predictive model. The model iteratively focuses on instances that are harder to classify correctly. The hyperparameters tuned were n_estimators, representing the number of boosting stages, and learning_rate, which reduces the weight of each weak learner’s contribution. The tested values for n_estimators were [50, 100, 200], and for learning_rate, they were [0.001, 0.01, 0.1]. AdaBoost is particularly useful when dealing with imbalanced datasets and often yields improved accuracy by combining weak learners. However, it can be sensitive to noisy data and outliers, and if not tuned properly, it may overfit.
+Combines multiple weak classifiers (typically decision trees) to build a stronger predictive model. The model iteratively focuses on instances that are harder to classify correctly. The hyperparameters tuned were n_estimators, representing the number of boosting stages, and learning_rate, which reduces the weight of each weak learner’s contribution. The tested values for n_estimators were [50, 100, 200], and for learning_rate, they were [0.001, 0.01, 0.1]. After hyperparameter tuning using GridSearchCV, the best parameters found for AdaBoost were ```learning_rate=0.1``` and ```n_estimators=200```. AdaBoost is particularly useful when dealing with imbalanced datasets and often yields improved accuracy by combining weak learners. However, it can be sensitive to noisy data and outliers, and if not tuned properly, it may overfit.
 
+## Evaluation
 ### Model Performance Summary
 | Model              | Train Accuracy | Test Accuracy  |
 |--------------------|----------------|----------------|
@@ -156,9 +159,8 @@ Combines multiple weak classifiers (typically decision trees) to build a stronge
 | RandomForest       | 0.9638         | 0.9631         |
 | AdaBoost           | 0.9627         | 0.9630         |
 
-In conclusion, the obtained model performance results demonstrate that all four models achieve elevated accuracy on both the training and testing datasets. Notably, LinearSVC and LogisticRegression show slightly diminished accuracy (94%) relative to RandomForest and AdaBoosting (96%). Consequently, these outcomes suggest a slightly more robust and reliable outcome for this particular prediction task.
+The obtained model performance results demonstrate that all four models achieve elevated accuracy on both the training and testing datasets. Notably, LinearSVC and LogisticRegression show slightly diminished accuracy (94%) relative to RandomForest and AdaBoosting (96%). Consequently, these outcomes suggest a slightly more robust and reliable outcome for this particular prediction task.
 
-## Evaluation
 ### Classification Report
 This report presents the evaluation metrics of each model's performance by summarizing the following: 
 - **Precision**: Measures the accuracy of positive predictions made by the model. This metric indicates the proportion of correctly predicted positive instances out of all predicted as positive.
