@@ -159,7 +159,7 @@ Combines multiple weak classifiers (typically decision trees) to build a stronge
 | RandomForest       | 0.9638         | 0.9631         |
 | AdaBoost           | 0.9627         | 0.9630         |
 
-The obtained model performance results demonstrate that all four models achieve elevated accuracy on both the training and testing datasets. Notably, LinearSVC and LogisticRegression show slightly diminished accuracy (94%) relative to RandomForest and AdaBoosting (96%). Consequently, these outcomes suggest a slightly more robust and reliable outcome for this particular prediction task.
+The obtained model performance results demonstrate that all four models achieve elevated accuracy on both the training and testing datasets. Notably, LinearSVC and LogisticRegression show slightly diminished accuracy (94%) relative to RandomForest and AdaBoosting (96%). Consequently, these outcomes suggest a slightly more robust and reliable outcome for this particular prediction task. Among the evaluated models, **RandomForest** achieves the highest accuracy on both training and testing datasets, indicating it is the best-performing algorithm in this case.
 
 ### Classification Report
 This report presents the evaluation metrics of each model's performance by summarizing the following: 
