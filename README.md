@@ -37,7 +37,7 @@ This dataset consists of 100000 entries before data cleaning and is designed to 
 
 ### Data Condition
 - There are no missing values
-- Have 3854 data duplication
+- Contains 3,854 duplicate entries
 - Data imbalance
 
 The dataset consists of eight input features and one target label, which are as follows:
@@ -46,7 +46,7 @@ The dataset consists of eight input features and one target label, which are as 
 - Body Mass Index (BMI): The range of BMI in the dataset is from 10.16 to 71.55. (Underweight (BMI < 18.5),  Normal (18.5 ≤ BMI < 24.9), Overweight (25 ≤ BMI < 29.9), and Obese (BMI ≥ 30)).
 - Hypertension: It has values of 0 or 1 where 0 indicates indicates they don’t have hypertension and 1 means they have hypertension.
 - Heart Disease: It has values of 0 or 1 where 0 indicates they don’t have heart disease and 1 means they have heart disease.
-- Smoking History: Consists of five categories which are not current, former, no info, current, never, and ever.
+- Smoking History: Consists of six categories which are not current, former, no info, current, never, and ever.
 - HbA1c Level: A measure of a person's average blood sugar level over the past 2-3 months, higher levels indicate a greater risk of developing diabetes.
 - Blood Glucose Level: Refers to the amount of glucose in the bloodstream at a given time, high levels are a key indicator of diabetes.
 - Diabetes: The target variable being predicted, 1 indicates the presence of diabetes and 0 indicates the absence of diabetes.
