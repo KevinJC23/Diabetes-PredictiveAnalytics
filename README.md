@@ -256,7 +256,6 @@ The **ROC-AUC (Receiver Operating Characteristic - Area Under Curve)** is a perf
 
 ![ROC-AUC](https://github.com/user-attachments/assets/7b89f53b-b94c-4989-8d4a-12132a2a2148)
 
-
 Based on the observed results, both RandomForest and AdaBoost emerged as effective diabetes detection within this dataset. Conversely, LinearSVC and LogisticRegression, while offering the advantage of simplicity and speed, may still be considered as alternative approaches.
 
 ## Conclusion
