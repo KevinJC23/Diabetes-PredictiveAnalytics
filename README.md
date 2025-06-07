@@ -65,7 +65,7 @@ This part explained datatypes from each column (features) on dataset. Datatype s
 | blood_glucose_level  | 100,000        | int64   |
 | diabetes             | 100,000        | int64   |
 
-### Datasets Statistic Descriptive
+### Datasets Descriptive Statistic
 This part displays the statistical summary of each column on the dataset's numeric features.
 | Statistic | age       | hypertension | heart_disease  | bmi       | HbA1c_level | blood_glucose_level  | diabetes |
 |-----------|-----------|--------------|----------------|-----------|-------------|----------------------|----------|
